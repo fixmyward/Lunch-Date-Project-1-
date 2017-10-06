@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lunch Date</title>
+  <title>Lunch Date</title>
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
 
 <div class = "container">
-	<div class="jumbotron">
-  		<h1 class="text-centre"><span class="glyphicons glyphicons-fast-food">Lunch Date</span></h1>
-  		<h3 class="text-centre">An app that facilitates two friends in nearby locations discussing and choosing a restaurant at which to share lunch, providing each user directions to the mutually selected restaurant.</h3>
-	</div>
+  <div class="jumbotron">
+      <h1 class="text-centre"><span class="glyphicons glyphicons-fast-food">Lunch Date</span></h1>
+      <h3 class="text-centre">An app that facilitates two friends in nearby locations discussing and choosing a restaurant at which to share lunch, providing each user directions to the mutually selected restaurant.</h3>
+  </div>
 
-	<div class="row">
+  <div class="row">
       <div class="col-sm-12">
         <br>
         <!-- First panel is for handling the search parameters -->
@@ -39,21 +39,21 @@
               <!-- Here we capture the number of records that the user wants to retrieve  -->
               <div class="form-group">
                 <label for="pwd">Choices of Cuisines</label>
-                	<select class="form-control" id="cuisine-choice">
-							<option value="Mexican">Mexican</option>
-							<option value="Italian">Italian</option>
-							<option value="Mediterranean">Mediterranean</option>
-							<option value="American">American</option>
-							<option value="Japanese">Japanese</option>
-							<option value="Korean">Korean</option>
-							<option value="Thai">Thai</option>
-							<option value="French">French</option>
-							<option value="Indian">Indian</option>
-							<option value="Vietnamese">Vietnamese</option>
-							<option value="Fast Food">Fast Food</option>
-							<option value="Chinese">Chinese</option>
-							<option value="Hawaiian">Hawaiian</option>
-					</select>
+                  <select class="form-control" id="cuisine-choice">
+              <option value="Mexican">Mexican</option>
+              <option value="Italian">Italian</option>
+              <option value="Mediterranean">Mediterranean</option>
+              <option value="American">American</option>
+              <option value="Japanese">Japanese</option>
+              <option value="Korean">Korean</option>
+              <option value="Thai">Thai</option>
+              <option value="French">French</option>
+              <option value="Indian">Indian</option>
+              <option value="Vietnamese">Vietnamese</option>
+              <option value="Fast Food">Fast Food</option>
+              <option value="Chinese">Chinese</option>
+              <option value="Hawaiian">Hawaiian</option>
+          </select>
               </div>
 
             
@@ -66,10 +66,10 @@
       </div>
     </div>
 
-	<div class = "row">
-		<div class = "col-sm-8">
-			<br>
-			<div class="panel panel-primary">
+  <div class = "row">
+    <div class = "col-sm-8">
+      <br>
+      <div class="panel panel-primary">
 
           <!-- Panel Heading for the retrieved articles box -->
           <div class="panel-heading">
@@ -78,15 +78,49 @@
 
           <!-- This main panel will hold each of the resulting articles -->
           <div class="panel-body" id="well-section">
+            <ol>
+          <li>Big Fish Little Fish</li>
+            <p>111 Spear St. Ste B09, San Francisco, CA 94105</p>
+            <p>Hours: 8:00 am - 9:00 pm</p>
+            <p>4 ratings <a href="www.bigfishlittlefish.com">(34 reviews)</a></p>
+          <p><a href="www.bigfishlittlefish.com">Menu</a></p>
+          <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Select</button>
+        <br>
+          <li>Working Girls' Cafe</li>
+            <p>101 Mission St, Ste 140, San Francisco, CA 94105</p>
+            <p>Hours: 8:00 am - 9:00 pm</p>
+            <p>4 ratings <a href="www.bigfishlittlefish.com">(224 reviews)</a></p>
+            <p><a href="www.bigfishlittlefish.com">Menu</a></p>
+            <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Select</button>
+        <br>
+          <li>FistFul Of Tacos</li>
+            <p>201 Harrison St, Ste C2, San Francisco, CA 94105
+            <p>Hours: 8:00 am - 9:00 pm</p>
+            <p>4.5 ratings <a href="www.bigfishlittlefish.com">(16 reviews)</a></p>
+            <p><a href="www.bigfishlittlefish.com">Menu</a></p>
+            <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Select</button>
+      </ol> 
+          </div>
+        </div>
+      </div>
+
+       <div class="col-sm-4">
+        <br>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+            <h3 class="panel-title"><strong><i class="fa fa-table"></i>Pin Down Map</strong></h3>
+            </div>
+
+          <div class="panel-body" id="well-section">
           </div>
         </div>
       </div>
     </div>
 
     <div class = "row">
-		<div class = "col-sm-12">
-			<br>
-			<div class="panel panel-primary">
+    <div class = "col-sm-12">
+      <br>
+      <div class="panel panel-primary">
 
           <!-- Panel Heading for the retrieved articles box -->
           <div class="panel-heading">
@@ -101,9 +135,9 @@
     </div>
 
     <div class = "row">
-		<div class = "col-sm-12">
-			<br>
-			<div class="panel panel-primary">
+    <div class = "col-sm-12">
+      <br>
+      <div class="panel panel-primary">
 
           <!-- Panel Heading for the retrieved articles box -->
           <div class="panel-heading">
@@ -112,13 +146,23 @@
 
           <!-- This main panel will hold each of the resulting articles -->
           <div class="panel-body" id="well-section">
+             <div class="col-lg-12">
+              <div class="div1">This div is smaller (width is 300px and height is 100px).</div>
+        <br>
+          <div class="input-group">
+             <input type="text" class="form-control" placeholder="Type your chat here">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button">Enter</button>
+              </span>
+          </div>
+        </div>
           </div>
         </div>
       </div>
     </div>
 </div>
 
-	
+  
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </script>
