@@ -3,14 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Zomato API testing</title>
-  <!-- Bootswatch Styling for Improving the Aesthetics -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
-
-  <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+  <title>Zomato API Prototype</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-  <!-- Style to fix the issue of text extending past panel length -->
   <style>
     .panel-body a {
       word-break: break-all;
@@ -20,59 +15,57 @@
 
 <body>
 
-  <!-- Main Bootstrap Search -->
   <div class="container">
 
-    <!-- Jumbotron for Title -->
-    <div class="jumbotron" style="background-color: #20315A ; color: white;">
-      <h1 class="text-center"><strong><i class="fa fa-newspaper-o"></i> New York Times Search</strong></h1>
+    <div class="jumbotron" style="background-color: #337ab7; color: #fff;">
+      <h2 class="text-center"><strong><span class="glyphicon glyphicon-cutlery"></span> Zomato API Prototyping</strong>
+      <p><a href="https://docs.google.com/document/d/1PQPgRwO9DvEastm3IRZoy6MZkn9RRP-yyEdNMpsNK18/edit#" target="_blank" style="color: #fff;">"Lunch Date" Project Google Doc</a></p></h2>
     </div>
 
-    <!-- Row for Searching New York Times -->
     <div class="row">
       <div class="col-sm-12">
         <br>
-        <!-- First panel is for handling the search parameters -->
+
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>   Search Parameters</strong></h3>
+            <h3 class="panel-title"><strong><i class="fa fa-list-alt"></i> Search Parameters</strong></h3>
           </div>
           <div class="panel-body">
 
-            <!-- Here we create an HTML Form for handling the inputs-->
-            <form role="form">
+           <form role="form">
 
-              <!-- Here we create the text box for capturing the search term-->
+              <p>Find latitudes and longitudes to test with at <a href="https://www.latlong.net/" target="_blank">https://www.latlong.net</a>.  The default coordinates are for zip code 94105.</p>
               <div class="form-group">
-                <label for="search">Search Term:</label>
-                <input type="text" class="form-control" id="search-term">
+                <label for="user-latitude">User Latitude:</label>
+                <input type="text" class="form-control" id="user-latitude" value="37.789018">
               </div>
 
-              <!-- Here we capture the number of records that the user wants to retrieve  -->
+              <div class="form-group">
+                <label for="user-longitude">User Longitude:</label>
+                <input type="text" class="form-control" id="user-longitude" value="-122.391506">
+              </div>
+
+              <div class="form-group">
+                <label for="user-cuisine">User Cuisine:</label>
+                <select class="form-control" id="user-cuisine">
+                  <option value="0" selected>Choose a Cuisine</option>
+                  <!-- Setting the option for 5 as default -->
+                  <option value="thai">Thai</option>
+                  <option value="mexican">Mexican</option>
+                </select>
+              </div>
+
               <div class="form-group">
                 <label for="pwd">Number of Records to Retrieve:</label>
                 <select class="form-control" id="num-records-select">
-							<option value="1">1</option>
-							<!-- Setting the option for 5 as default -->
-							<option value="5" selected>5</option>
-							<option value="10">10</option>
-						</select>
+    							<option value="1">1</option>
+    							<!-- Setting the option for 5 as default -->
+    							<option value="5" selected>5</option>
+    							<option value="10">10</option>
+    						</select>
               </div>
 
-              <!-- Here we capture the Start Year Parameter-->
-              <div class="form-group">
-                <label for="start-year">Start Year (Optional):</label>
-                <input type="text" class="form-control" id="start-year">
-              </div>
-
-              <!-- Here we capture the End Year Parameter -->
-              <div class="form-group">
-                <label for="end-year">End Year (Optional):</label>
-                <input type="text" class="form-control" id="end-year">
-              </div>
-
-              <!-- Here we have our final submit button -->
-              <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Search</button>
+              <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Search Zomato</button>
               <button type="button" class="btn btn-default" id="clear-all"><i class="fa fa-trash"></i> Clear Results</button>
 
             </form>
@@ -91,7 +84,7 @@
 
           <!-- Panel Heading for the retrieved articles box -->
           <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa fa-table"></i>   Top Articles</strong></h3>
+            <h3 class="panel-title"><strong><i class="fa fa-table"></i> Top Restaurants</strong></h3>
           </div>
 
           <!-- This main panel will hold each of the resulting articles -->
@@ -107,18 +100,15 @@
 
         <!-- Line Break followed by closing -->
         <hr>
-        <h5 class="text-center"><small>Made by Ahmed with lots and lots of <i class="fa fa-heart"></i></small></h5>
+        <h5 class="text-center"><small>Made by David with <i class="fa fa-heart"></i></small></h5>
 
       </div>
     </div>
 
   </div>
 
-  <!-- jQuery JS -->
   <script src="https://code.jquery.com/jquery.js"></script>
-
-  <!-- Code to the JavaScript File -->
-  <script src="NYTCode.js"></script>
+  <script src="zomato.js"></script>
 
 </body>
 
