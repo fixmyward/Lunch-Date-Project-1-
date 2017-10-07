@@ -14,9 +14,6 @@
 </head>
 
 <body>
-https://developers.zomato.com/api/v2.1/search?count=10&lat=37.789018&lon=37.789018&cuisines=95&apikey=9d1904342e147305e39dc198de1e915c<br>
-https://developers.zomato.com/api/v2.1/restaurant?res_id=16782899&apikey=9d1904342e147305e39dc198de1e915c<br/>
-
 
   <div class="container">
 
@@ -58,29 +55,28 @@ https://developers.zomato.com/api/v2.1/restaurant?res_id=16782899&apikey=9d19043
               <div class="form-group">
                 <label for="search-cuisine">User Cuisine:</label>
                 <select class="form-control" id="search-cuisine">
-                  <option value="0" selected>Choose a Cuisine</option>
+                  <!-- <option value="0" selected>Choose a Cuisine</option> -->
                   <option value="95">Thai</option>
                   <option value="73">Mexican</option>
                   <option value="148">Indian</option>
                   <option value="82">Pizza</option>
                 </select>
-                [This is the only search parameter users will be able to customize, unless we allow them to type in their street address location.]
+                [All <a href="https://developers.zomato.com/api/v2.1/cuisines?city_id=306&apikey=9d1904342e147305e39dc198de1e915c" target="_blank">available cuisines</a> in San Francisco.]
               </div>
 
               <div class="form-group">
                 <label for="search-radius">Search Radius (in meters):</label>
-                <input type="text" class="form-control" id="search-radius" value="500">
-                [500 meters is about 1/3 mile. <a href="https://www.google.com/search?q=meters+in+a+mile" target="_blank">Calculator</a>]
+                <input type="text" class="form-control" id="search-radius" value="400">
+                [400 meters is about 1/4 mile. <a href="https://www.google.com/search?q=meters+in+a+mile" target="_blank">Calculator</a>]
               </div>
 
               <div class="form-group">
                 <label for="pwd">Number of Records to Retrieve:</label>
                 <select class="form-control" id="num-records-select">
-    							<option value="5">5</option>
+    							<option value="5" selected>5</option>
     							<option value="10">10</option>
-                  <option value="20" selected>20</option>
+                  <option value="20">20</option>
     						</select>
-                [20 is selected as default for testing purposes. Final app might only be 5 or 10.]
               </div>
 
               <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Search Zomato</button>
@@ -92,21 +88,21 @@ https://developers.zomato.com/api/v2.1/restaurant?res_id=16782899&apikey=9d19043
       </div>
     </div>
 
-    <!-- This row will handle all of the retrieved articles -->
+    <!-- This row will handle all of the retrieved restaurants -->
     <div class="row">
       <div class="col-sm-12">
         <br>
 
-        <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
+        <!-- This panel will initially be made up of a panel and DIVs for each of the restaurants retrieved -->
         <div class="panel panel-primary">
 
-          <!-- Panel Heading for the retrieved articles box -->
+          <!-- Panel Heading for the retrieved restaurants box -->
           <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa fa-table"></i> Top Restaurants</strong></h3>
+            <h3 class="panel-title"><strong><i class="fa fa-table"></i> Restaurants</strong></h3>
           </div>
 
-          <!-- This main panel will hold each of the resulting articles -->
-          <div class="panel-body" id="well-section">
+          <!-- This main panel will hold each of the resulting restaurants -->
+          <div class="panel-body" id="results-section">
           </div>
         </div>
       </div>
