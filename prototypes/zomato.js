@@ -41,12 +41,10 @@ function runQuery(numResults, queryURL) {
 
       // Create variables for data sought, and log results
       var restaurantName = zomatoData.restaurants[i].restaurant.name;
-        // console.log('restaurantName: ' + restaurantName);
       var restaurantAddress = zomatoData.restaurants[i].restaurant.location.address;
-        // console.log('restaurantAddress: ' + restaurantAddress);
       var restaurantAggRating = zomatoData.restaurants[i].restaurant.user_rating.aggregate_rating;
-        // console.log('restaurantAggRating: ' + restaurantAggRating);
-      // console.log('-------------');
+      var restaurantMenu = zomatoData.restaurants[i].restaurant.menu_url;
+      var restaurantThumb = zomatoData.restaurants[i].restaurant.thumb;
 
       // Write results to page 
       var resultSection = $('<div>');
@@ -55,6 +53,12 @@ function runQuery(numResults, queryURL) {
       $('#results-section').append(resultSection);
 
       // Confirm that the specific JSON for the result isn't missing any details
+
+      if (restaurantThumb !== 'null') {
+        $('#result-' + resultCounter)
+          .append('<div class="restaurant-thumb"><img src="'+ restaurantThumb + '"></div>');
+      }
+
       if (restaurantName !== 'null') {
         $('#result-' + resultCounter)
           .append(
@@ -71,7 +75,7 @@ function runQuery(numResults, queryURL) {
 
       // Then display the remaining fields in the HTML (Section Name, Date, URL)
       $('#result-' + resultCounter)
-        .append('<h5>Rating: ' + restaurantAggRating + '</h5>');
+        .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>');
 
     }
 
