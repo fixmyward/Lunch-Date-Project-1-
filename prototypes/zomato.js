@@ -2,113 +2,127 @@
 // =============
 
 // Zomato API authorization key
-var authKey = '717e99a4555f6f42df499e13e387af0b';
+var apiKey = '9d1904342e147305e39dc198de1e915c';
 
-var searchLocation = '';
+var userLocation = '';
+var userLatitude = '';
+var userLongitude = '';
 var searchCuisine = '';
-
-var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-  authKey + "&q=";
-
+var searchRadius = '';
+var numResults = '';
 var resultCounter = 0;
+
+var queryURLBase = "https://developers.zomato.com/api/v2.1/search?apikey=" +
+  apiKey;
+
+// Fully formed query URL example:
+// https://developers.zomato.com/api/v2.1/search?apikey=9d1904342e147305e39dc198de1e915c&lat=37.789018&lon=-122.391506&cuisines=indian&radius=500&count=5
+
 
 // FUNCTIONS
 // =============
 
-// This runQuery function expects two parameters:
-// (the number of articles to show and the final URL to download data from)
-function runQuery(numResults, queryURL) {
+function runQuery(queryURL) {
   console.log(queryURL)
 
   $.ajax({
     url: queryURL,
-    method: "GET"
-  }).done(function(zomatoData) {
+    method: 'GET'
+  }).done(function(numResults, searchURL) {
 
     // Logging the URL so we have access to it for troubleshooting
-    console.log("------------------------------------");
-    console.log("URL: " + queryURL);
-    console.log("------------------------------------");
-
+    console.log('------------------------------------');
+    console.log('queryURL: ' + queryURL);
     // Log the zomatoData to console, where it will show up as an object
     console.log(zomatoData);
-    console.log("------------------------------------");
+    console.log('------------------------------------');
 
-    // Loop through and provide the correct number of articles
+    // Loop through and provide the correct number of results
     for (var i = 0; i < numResults; i++) {
 
-      // Add to the Article Counter (to make sure we show the right number)
       resultCounter++;
 
-      // Create the HTML well (section) and add the article content for each
-      var wellSection = $("<div>");
-      wellSection.addClass("well");
-      wellSection.attr("id", "result-" + resultCounter);
-      $("#results-section").append(wellSection);
+      // var resultSection = $('<div>');
+      // resultSection.addClass('restaurant');
+      // resultSection.attr('id', 'result-' + resultCounter);
+      // $('#results-section').append(resultSection);
 
-      // Confirm that the specific JSON for the article isn't missing any details
-      // If the article has a headline include the headline in the HTML
-      if (zomatoData.response.docs[i].headline !== "null") {
-        $("#result-" + resultCounter)
-          .append(
-            "<h3 class='articleHeadline'><span class='label label-primary'>" +
-            resultCounter + "</span><strong> " +
-            zomatoData.response.docs[i].headline.main + "</strong></h3>"
-          );
+      // // Confirm that the specific JSON for the article isn't missing any details
+      // // If the article has a headline include the headline in the HTML
+      // if (zomatoData.response.restaurants.restaurant[i] !== 'null') {
+      //   $('#result-' + resultCounter)
+      //     .append(
+      //       '<h3 class="articleHeadline"><span class="label label-primary">' +
+      //       resultCounter + '</span><strong> ' +
+      //       zomatoData.response.restaurants.restaurant[i].name + '</strong></h3>'
+      //     );
 
-        // Log the first article's headline to console
-        console.log(zomatoData.response.docs[i].headline.main);
-      }
+      //   // Log the first article's headline to console
+      //   console.log(zomatoData.response.docs[i].headline.main);
+      // }
 
-      // If the article has a byline include the headline in the HTML
-      if (zomatoData.response.docs[i].byline && zomatoData.response.docs[i].byline.original) {
-        $("#result-" + resultCounter)
-          .append("<h5>" + zomatoData.response.docs[i].byline.original + "</h5>");
+      // // If the article has a byline include the headline in the HTML
+      // if (zomatoData.response.docs[i].byline && zomatoData.response.docs[i].byline.original) {
+      //   $("#result-" + resultCounter)
+      //     .append("<h5>" + zomatoData.response.docs[i].byline.original + "</h5>");
 
-        // Log the first article's Author to console.
-        console.log(zomatoData.response.docs[i].byline.original);
-      }
+      //   // Log the first article's Author to console.
+      //   console.log(zomatoData.response.docs[i].byline.original);
+      // }
 
-      // Then display the remaining fields in the HTML (Section Name, Date, URL)
-      $("#articleWell-" + resultCounter)
-        .append("<h5>Section: " + zomatoData.response.docs[i].section_name + "</h5>");
-      $("#articleWell-" + resultCounter)
-        .append("<h5>" + zomatoData.response.docs[i].pub_date + "</h5>");
-      $("#articleWell-" + resultCounter)
-        .append(
-          "<a href='" + zomatoData.response.docs[i].web_url + "'>" +
-          zomatoData.response.docs[i].web_url + "</a>"
-        );
+      // // Then display the remaining fields in the HTML (Section Name, Date, URL)
+      // $("#articleWell-" + resultCounter)
+      //   .append("<h5>Section: " + zomatoData.response.docs[i].section_name + "</h5>");
+      // $("#articleWell-" + resultCounter)
+      //   .append("<h5>" + zomatoData.response.docs[i].pub_date + "</h5>");
+      // $("#articleWell-" + resultCounter)
+      //   .append(
+      //     "<a href='" + zomatoData.response.docs[i].web_url + "'>" +
+      //     zomatoData.response.docs[i].web_url + "</a>"
+      //   );
 
-      // Log the remaining fields to console as well
-      console.log(zomatoData.response.docs[i].pub_date);
-      console.log(zomatoData.response.docs[i].section_name);
-      console.log(zomatoData.response.docs[i].web_url);
+      // Log the fields to console
+      console.log(zomatoData.response.restaurants.restaurant[i].name);
+      console.log(zomatoData.response.restaurants.restaurant[i].location.address);
+      console.log(zomatoData.response.restaurants.restaurant[i].user_rating.aggregate_rating);
     }
   });
 
 }
+
 
 // METHODS
 // =============
 
 // on.("click") function associated with the Search Button
 $("#run-search").on("click", function(event) {
-  // This line allows us to take advantage of the HTML "submit" property
-  // This way we can hit enter on the keyboard and it registers the search
-  // (in addition to clicks).
   event.preventDefault();
 
-  // Initially sets the resultCounter to 0
   resultCounter = 0;
 
-  // Empties the region associated with the articles
-  $("#results-section").empty();
+  // Empties the previous results
+  $('#results-section').empty();
 
-  userLocation = $("#user-location").val().trim();
-  var searchURL = queryURLBase + userLocation;
+  userLocation = $('#user-location').val().trim();
+    console.log('userLocation: ' + userLocation);
 
-  numResults = $("#num-records-select").val();
+  userLatitude = $('#user-latitude').val().trim();
+    console.log('userLatitude: ' + userLatitude);
+
+  userLongitude = $('#user-longitude').val().trim();
+    console.log('userLongitude: ' + userLongitude);
+
+  searchCuisine = $('#search-cuisine').val().trim();
+    console.log('searchCuisine: ' + searchCuisine);
+
+  searchRadius = $('#search-radius').val().trim();
+    console.log('searchRadius: ' + searchRadius);
+
+  numResults = $('#num-records-select').val();
+    console.log('numResults: ' + numResults);
+
+  var searchURL = queryURLBase + '&lat=' + userLatitude + '&lon=' + userLongitude + '&cuisines=' + searchCuisine + '&radius=' + searchRadius + '&count=' + numResults;
+    console.log('searchURL: ' + searchURL);
 
   // startYear = $("#start-year").val().trim();
   // endYear = $("#end-year").val().trim();
@@ -119,7 +133,6 @@ $("#run-search").on("click", function(event) {
   //   searchURL = searchURL + "&end_date=" + endYear + "0101";
   // }
 
-  // include to the runQuery function
   runQuery(numResults, searchURL);
 });
 
