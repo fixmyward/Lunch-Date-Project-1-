@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<form>
+	  User(A) address:
+	  <input type="text" name="locationA" placeholder="" id="loc-a">
+	  <br>
+	  User(B) address:
+	  <input type="text" name="locationB" placeholder="" id ="loc-b">
+	  <br><br>
+	  <input type="submit" id="submit-btn" value="Submit">
+	</form> 
+
+<script type="text/javascript">
+
+	var access_token = "pk.eyJ1IjoibWFodGFiMTIiLCJhIjoiY2o4ZXppdDRrMTh0dTMzbXNjY3NoMnN0OCJ9.6jXHANiUibQbeXNIljgFUQ";
+
+	var userAaddress= '';
+	var userBaddress= '';
+	var userAddresses= [];
+	var userLocations= [];
+	var distance= 0;
+	
+	
+	
+
+	var queryURLBase = "https://api.mapbox.com/geocoding/v5/mapbox.places";
+
+	console.log(queryURLBase);
+
+	function runQuery(queryURL) {
+
+
+
+		$.ajax({
+	    url: queryURL,
+	    method: 'GET'
+	  }).done(function(locationData) {
+
+	    console.log('queryURL: ' + queryURL);
+
+	    console.log(locationData);
+	    console.log("user address: " +locationData.features[0].place_name);
+	    console.log("user location: " +locationData.features[0].center);
+
+	   
+	    //calculate the distance between user A and B in meters
+
+	   var distance = Math.sqrt(locationData.features[0].center[0]*locationData.features[0].center[0] + locationData.features[0].center[1]*locationData.features[0].center[1]);
+
+	   console.log("distance between the 2 users: " + distance);
+
+	    
+	   
+  	  });
+	}
+
+	//console.log("distance between the 2 users: " + distance);
+
+ 
+
+ $("#submit-btn").on("click", function(event) {
+  event.preventDefault();
+
+  
+
+   userAaddress = $("#loc-a").val().trim();
+   userBaddress = $("#loc-b").val().trim();
+
+   userAaddress = encodeURIComponent(userAaddress);
+   userBaddress = encodeURIComponent(userBaddress);
+
+   userAddresses.push(userAaddress);
+   userAddresses.push(userBaddress);
+   console.log(userAddresses);
+
+   for(var i=0; i<userAddresses.length; i++){
+	  var queryURL = queryURLBase +'/'+ '&place_name=' + userAddresses[i] +'.json?access_token=' +access_token;
+	  runQuery(queryURL);
+	  //console.log(queryURL);
+	}
+
+	
+});
+ 
+
+</script>
+
+</body>
+</html>
+
