@@ -22,45 +22,79 @@
 	var userAaddress= '';
 	var userBaddress= '';
 	var userAddresses= [];
-	var userLocations= [];
+	//var userLocations= [];
+	var userLocations= {
+		a:[0,0],
+		b:[0,0]
+	};
 	var distance= 0;
+	var counter = 0;
 	
 	
 	
 
 	var queryURLBase = "https://api.mapbox.com/geocoding/v5/mapbox.places";
 
-	console.log(queryURLBase);
+	//console.log(queryURLBase);
 
 	function runQuery(queryURL) {
-
-
 
 		$.ajax({
 	    url: queryURL,
 	    method: 'GET'
 	  }).done(function(locationData) {
 
-	    console.log('queryURL: ' + queryURL);
+	  	
+	    //console.log('queryURL: ' + queryURL);
 
-	    console.log(locationData);
+	    //console.log(locationData);
+	    counter++;
 	    console.log("user address: " +locationData.features[0].place_name);
-	    console.log("user location: " +locationData.features[0].center);
+	    //console.log("user location: " +locationData.features[0].center);
 
+	   /* userLocations[0] = locationData.features[0].center;
+	    console.log("userA location: " +userLocations[0]);
+	    userLocations[1] = locationData.features[0].center;
+	    console.log("userB location: " +userLocations[1]);*/
+
+	    if (counter == 1){
+		    userLocations.a[0] = locationData.features[0].center[0];
+		    userLocations.a[1] = locationData.features[0].center[1];
+		    //counter++;
+
+	   		console.log("userA location: " +userLocations.a);
+	    }
+
+	    if (counter == 2){
+	    	userLocations.b[0] = locationData.features[0].center[0];
+	    	userLocations.b[1] = locationData.features[0].center[1];
+
+
+	   		console.log("userB location: " +userLocations.b);
+	   		 var dlat = Math.abs(userLocations.a[0]-userLocations.b[0]);
+	   		 //console.log(dlat);
+	  		 var dlong= Math.abs(userLocations.a[1]-userLocations.b[1]);
+	  		 //console.log(dlong);
+
+	  		// var distance =Math.hypot(dlat, dlong);
+
+	   		var distance = Math.sqrt(dlat*dlat + dlong*dlong);
+
+	   		console.log("distance between the 2 users: " + distance);
+	    }   
 	   
-	    //calculate the distance between user A and B in meters
+	    //calculate the distance between user A and B in meters	   
 
-	   var distance = Math.sqrt(locationData.features[0].center[0]*locationData.features[0].center[0] + locationData.features[0].center[1]*locationData.features[0].center[1]);
+	  // var dlat = Math.abs(userLocations.a[0]-userLocations.b[0]);
+	  // var dlong= Math.abs(userLocations.a[1]-userLocations.b[1]);
 
-	   console.log("distance between the 2 users: " + distance);
-
+	   //	var distance = Math.sqrt(dlat*dlat + dlong*dlong);
 	    
 	   
   	  });
+  	  
 	}
-
-	//console.log("distance between the 2 users: " + distance);
-
+	
  
 
  $("#submit-btn").on("click", function(event) {
