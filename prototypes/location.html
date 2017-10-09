@@ -13,9 +13,14 @@
 	  <input type="text" name="locationB" placeholder="" id ="loc-b">
 	  <br><br>
 	  <input type="submit" id="submit-btn" value="Submit">
+	  <br><br>
 	</form> 
 
-<script type="text/javascript">
+	<div id="display-loc-a"></div>
+	<br>	
+	<div id="display-loc-b"></div>
+
+	<script type="text/javascript">
 
 	var access_token = "pk.eyJ1IjoibWFodGFiMTIiLCJhIjoiY2o4ZXppdDRrMTh0dTMzbXNjY3NoMnN0OCJ9.6jXHANiUibQbeXNIljgFUQ";
 
@@ -42,53 +47,43 @@
 		$.ajax({
 	    url: queryURL,
 	    method: 'GET'
-	  }).done(function(locationData) {
-
-	  	
-	    //console.log('queryURL: ' + queryURL);
-
-	    //console.log(locationData);
+	  }).done(function(locationData) {	  	
+	    
 	    counter++;
-	    console.log("user address: " +locationData.features[0].place_name);
-	    //console.log("user location: " +locationData.features[0].center);
-
-	   /* userLocations[0] = locationData.features[0].center;
-	    console.log("userA location: " +userLocations[0]);
-	    userLocations[1] = locationData.features[0].center;
-	    console.log("userB location: " +userLocations[1]);*/
+	    //console.log("user address: " +locationData.features[0].place_name);
+	    
 
 	    if (counter == 1){
 		    userLocations.a[0] = locationData.features[0].center[0];
 		    userLocations.a[1] = locationData.features[0].center[1];
-		    //counter++;
 
-	   		console.log("userA location: " +userLocations.a);
+		    $("#display-loc-a").append("userA lat:  " + userLocations.a[0]);
+		    $("#display-loc-a").append(" ,");		   
+		    $("#display-loc-a").append(" "+"userA long:  " + userLocations.a[1]);
+		    
+
+	   		//console.log("userA location: " +userLocations.a);
 	    }
 
 	    if (counter == 2){
 	    	userLocations.b[0] = locationData.features[0].center[0];
 	    	userLocations.b[1] = locationData.features[0].center[1];
 
+	    	$("#display-loc-b").append("userB lat:  " + userLocations.b[0] +" ,");
+		    $("#display-loc-b").append(" "+"userB long:  " + userLocations.b[1]);
 
-	   		console.log("userB location: " +userLocations.b);
-	   		 var dlat = Math.abs(userLocations.a[0]-userLocations.b[0]);
-	   		 //console.log(dlat);
-	  		 var dlong= Math.abs(userLocations.a[1]-userLocations.b[1]);
-	  		 //console.log(dlong);
 
+	   		//console.log("userB location: " +userLocations.b);
+	   		 //var dlat = Math.abs(userLocations.a[0]-userLocations.b[0]);
+	   		 
+	  		 //var dlong= Math.abs(userLocations.a[1]-userLocations.b[1]);
+	  		 
 	  		// var distance =Math.hypot(dlat, dlong);
 
-	   		var distance = Math.sqrt(dlat*dlat + dlong*dlong);
+	   		//var distance = Math.sqrt(dlat*dlat + dlong*dlong);
 
-	   		console.log("distance between the 2 users: " + distance);
+	   		//console.log("distance between the 2 users: " + distance);
 	    }   
-	   
-	    //calculate the distance between user A and B in meters	   
-
-	  // var dlat = Math.abs(userLocations.a[0]-userLocations.b[0]);
-	  // var dlong= Math.abs(userLocations.a[1]-userLocations.b[1]);
-
-	   //	var distance = Math.sqrt(dlat*dlat + dlong*dlong);
 	    
 	   
   	  });
@@ -97,30 +92,30 @@
 	
  
 
- $("#submit-btn").on("click", function(event) {
-  event.preventDefault();
+	 $("#submit-btn").on("click", function(event) {
+	  event.preventDefault();
 
-  
+	  
 
-   userAaddress = $("#loc-a").val().trim();
-   userBaddress = $("#loc-b").val().trim();
+	   userAaddress = $("#loc-a").val().trim();
+	   userBaddress = $("#loc-b").val().trim();
 
-   userAaddress = encodeURIComponent(userAaddress);
-   userBaddress = encodeURIComponent(userBaddress);
+	   userAaddress = encodeURIComponent(userAaddress);
+	   userBaddress = encodeURIComponent(userBaddress);
 
-   userAddresses.push(userAaddress);
-   userAddresses.push(userBaddress);
-   console.log(userAddresses);
+	   userAddresses.push(userAaddress);
+	   userAddresses.push(userBaddress);
+	   console.log(userAddresses);
 
-   for(var i=0; i<userAddresses.length; i++){
-	  var queryURL = queryURLBase +'/'+ '&place_name=' + userAddresses[i] +'.json?access_token=' +access_token;
-	  runQuery(queryURL);
-	  //console.log(queryURL);
-	}
+	   for(var i=0; i<userAddresses.length; i++){
+		  var queryURL = queryURLBase +'/'+ '&place_name=' + userAddresses[i] +'.json?access_token=' +access_token;
+		  runQuery(queryURL);
+		  
+		}
 
-	
-});
- 
+		
+	});
+	 
 
 </script>
 
