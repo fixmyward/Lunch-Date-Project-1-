@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Zomato API Prototype</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <style>
+    .panel-body a {
+      word-break: break-all;
+    }
+    .restaurant-thumb {
+      width: 75px;
+      float: right;
+      overflow: hidden;
+    }
+    .restaurant-thumb img {
+      width: auto;
+      max-height: 75px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron" style="background-color: #337ab7; color: #fff;">
+      <h2 class="text-center"><strong><span class="glyphicon glyphicon-cutlery"></span> Zomato API Prototyping</strong>
+      <p><a href="https://docs.google.com/document/d/1PQPgRwO9DvEastm3IRZoy6MZkn9RRP-yyEdNMpsNK18/edit#" target="_blank" style="color: #fff;">"Lunch Date" Project Google Doc</a></p></h2>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong><i class="fa fa-list-alt"></i> Search Parameters</strong></h3>
+          </div>
+          <div class="panel-body">
+
+           <form role="form">
+
+              <p>Find latitudes and longitudes to test with at <a href="https://www.latlong.net/" target="_blank">www.latlong.net</a>.  Default coordinates below are for zip code <a href="https://www.latlong.net/c/?lat=37.789018&long=-122.391506" target="_blank">94105</a>.</p>
+              
+              <div class="form-group">
+                <label for="user-location">User Location:</label>
+                <input type="text" class="form-control" id="user-location" value="" placeholder="This field is not needed for current search">
+                [This field requires Mapping API to translate user street address to lat/long. Will be for user entering address manually.]
+              </div>
+
+              <div class="form-group">
+                <label for="user-latitude">User Latitude:</label>
+                <input type="text" class="form-control" id="user-latitude" value="37.789018">
+              </div>
+
+              <div class="form-group">
+                <label for="user-longitude">User Longitude:</label>
+                <input type="text" class="form-control" id="user-longitude" value="-122.391506">
+              </div>
+
+              <div class="form-group">
+                <label for="search-cuisine">User Cuisine:</label>
+                <select class="form-control" id="search-cuisine">
+                  <!-- <option value="0" selected>Choose a Cuisine</option> -->
+                  <option value="95">Thai</option>
+                  <option value="73">Mexican</option>
+                  <option value="148">Indian</option>
+                  <option value="82">Pizza</option>
+                </select>
+                [All <a href="https://developers.zomato.com/api/v2.1/cuisines?city_id=306&apikey=9d1904342e147305e39dc198de1e915c" target="_blank">available cuisines</a> in San Francisco.]
+              </div>
+
+              <div class="form-group">
+                <label for="search-radius">Search Radius (in meters):</label>
+                <input type="text" class="form-control" id="search-radius" value="400">
+                [400 meters is about 1/4 mile. <a href="https://www.google.com/search?q=meters+in+a+mile" target="_blank">Calculator</a>]
+              </div>
+
+              <div class="form-group">
+                <label for="pwd">Number of Records to Retrieve:</label>
+                <select class="form-control" id="num-records-select">
+    							<option value="5" selected>5</option>
+    							<option value="10">10</option>
+                  <option value="20">20</option>
+    						</select>
+              </div>
+
+              <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Search Zomato</button>
+              <button type="button" class="btn btn-default" id="clear-all"><i class="fa fa-trash"></i> Clear Previous Results</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- This row will handle all of the retrieved restaurants -->
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+
+        <!-- This panel will initially be made up of a panel and DIVs for each of the restaurants retrieved -->
+        <div class="panel panel-primary">
+
+          <!-- Panel Heading for the retrieved restaurants box -->
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong><i class="fa fa-table"></i> Restaurants</strong></h3>
+          </div>
+
+          <!-- This main panel will hold each of the resulting restaurants -->
+          <div class="panel-body" id="results-section">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Region -->
+    <div class="row">
+      <div class="col-sm-12">
+
+        <!-- Line Break followed by closing -->
+        <hr>
+        <h5 class="text-center"><small>Made by David with <i class="fa fa-heart"></i></small></h5>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="zomato.js"></script>
+
+</body>
+
+</html>
