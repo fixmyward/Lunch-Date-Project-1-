@@ -30,34 +30,34 @@
             <!-- Here we create an HTML Form for handling the inputs-->
             <form role="form">
 
-              <!-- Here we create the text box for capturing the search term-->
               <div class="form-group">
                 <label for="search">Location</label>
                 <input type="text" class="form-control" id="location" placeholder="Enter your current location">
+                <button type="submit" class="btn btn-default" id="location-btn"><i class="fa fa-search"></i> Search</button>
               </div>
 
               <!-- Here we capture the number of records that the user wants to retrieve  -->
               <div class="form-group">
                 <label for="pwd">Choices of Cuisines</label>
-                  <select class="form-control" id="cuisine-choice">
-              <option value="Mexican">Mexican</option>
-              <option value="Italian">Italian</option>
-              <option value="Mediterranean">Mediterranean</option>
-              <option value="American">American</option>
-              <option value="Japanese">Japanese</option>
-              <option value="Korean">Korean</option>
-              <option value="Thai">Thai</option>
-              <option value="French">French</option>
-              <option value="Indian">Indian</option>
-              <option value="Vietnamese">Vietnamese</option>
-              <option value="Fast Food">Fast Food</option>
-              <option value="Chinese">Chinese</option>
-              <option value="Hawaiian">Hawaiian</option>
-          </select>
+                <select class="form-control" id="search-cuisine">
+                  <option value="73">Mexican</option>
+                  <option value="82">Italian</option>
+                  <option value="Mediterranean">Mediterranean</option>
+                  <option value="American">American</option>
+                  <option value="Japanese">Japanese</option>
+                  <option value="Korean">Korean</option>
+                  <option value="95">Thai</option>
+                  <option value="French">French</option>
+                  <option value="148">Indian</option>
+                  <option value="Vietnamese">Vietnamese</option>
+                  <option value="Fast Food">Fast Food</option>
+                  <option value="Chinese">Chinese</option>
+                  <option value="Hawaiian">Hawaiian</option>
+                </select>
+                <button type="submit" class="btn btn-default" id="cuisines-btn"><i class="fa fa-search"></i> Search</button>
               </div>
 
-            
-              <button type="submit" class="btn btn-default" id="run-search"><i class="fa fa-search"></i> Search</button>
+             
              
 
             </form>
@@ -77,10 +77,10 @@
           </div>
 
           <!-- This main panel will hold each of the resulting articles -->
-          <div class="panel-body" id="well-section">
+          <div class="panel-body" id="results-section">
 
 
-            <div class="panel panel-default">
+            <!-- <div class="panel panel-default">
               <button type="submit" class="btn btn-default" id="run-search1"><i class="fa fa-search"></i> Select</button>
 
               <div class="panel-heading">BigFish Little Fish</div>
@@ -90,31 +90,9 @@
                   <p>4 ratings <a href="www.bigfishlittlefish.com">(34 reviews)</a></p>
                    <p><a href="www.bigfishlittlefish.com">Menu</a></p>
                 </div>
-              </div>
+              </div> -->
               
-            <div class="panel panel-default">
-              <button type="submit" class="btn btn-default" id="run-search1"><i class="fa fa-search"></i> Select</button>
-
-              <div class="panel-heading">Working Girls' Cafe</div>
-                <div class="panel-body">
-                  <p>101 Mission St, Ste 140, San Francisco, CA 94105</p>
-                  <p>Hours: 8:00 am - 9:00 pm</p>
-                  <p>4 ratings <a href="www.bigfishlittlefish.com">(34 reviews)</a></p>
-                   <p><a href="www.bigfishlittlefish.com">Menu</a></p>
-                </div>
-              </div>
-
-            <div class="panel panel-default">
-              <button type="submit" class="btn btn-default" id="run-search1"><i class="fa fa-search"></i> Select</button>
-
-              <div class="panel-heading">FistFul Of Tacos</div>
-                <div class="panel-body">
-                  <p>201 Harrison St, Ste C2, San Francisco, CA 94105</p>
-                  <p>Hours: 8:00 am - 9:00 pm</p>
-                  <p>4 ratings <a href="www.bigfishlittlefish.com">(34 reviews)</a></p>
-                   <p><a href="www.bigfishlittlefish.com">Menu</a></p>
-                </div>
-              </div>
+            
       
           </div>
         </div>
@@ -189,7 +167,7 @@
 <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 
 
-<script type="text/javascript" src="assets/javascript/moment.js">
+<script type="text/javascript" src="assets/javascript/app.js">
 </script>
 
 
