@@ -14,7 +14,7 @@
   <div class="container">
 
     <div class="jumbotron" style="background-color: #337ab7; color: #fff;">
-      <h2 class="text-center"><strong><span class="glyphicon glyphicon-cutlery"></span> Mapbox API Prototyping</strong>
+      <h2 class="text-center"><strong><span class="glyphicon glyphicon-map-marker"></span> Mapbox API Prototyping</strong>
       <p><a href="https://docs.google.com/document/d/1PQPgRwO9DvEastm3IRZoy6MZkn9RRP-yyEdNMpsNK18/edit#" target="_blank" style="color: #fff;">"Lunch Date" Project Google Doc</a></p></h2>
     </div>
 
@@ -58,13 +58,13 @@
 
 	<script type="text/javascript">
 
-		var access_token = "pk.eyJ1IjoibWFodGFiMTIiLCJhIjoiY2o4ZXppdDRrMTh0dTMzbXNjY3NoMnN0OCJ9.6jXHANiUibQbeXNIljgFUQ";
+		var access_token = 'pk.eyJ1IjoibWFodGFiMTIiLCJhIjoiY2o4ZXppdDRrMTh0dTMzbXNjY3NoMnN0OCJ9.6jXHANiUibQbeXNIljgFUQ';
 
 		var userAddress = '';
 		var userLatitude = '';
 		var userLongitude = '';
 
-		var queryURLBase = "https://api.mapbox.com/geocoding/v5/mapbox.places";
+		var queryURLBase = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 
 		function runQuery(queryURL) {
 
@@ -78,24 +78,24 @@
 		    userLongitude = locationData.features[0].center[0];
 		    userLatitude = locationData.features[0].center[1];
 	   
-		    $("#display-latlong").append("User latitude:  " + userLatitude);
-		    $("#display-latlong").append("<br>");	
-		    $("#display-latlong").append("User longitude:  " + userLongitude);
+		    $('#display-latlong').append('User latitude: ' + userLatitude);
+		    $('#display-latlong').append('<br>');	
+		    $('#display-latlong').append('User longitude: ' + userLongitude);
 	   
 		  });
 		};
 
-		$("#submit-btn").on("click", function(event) {
+		$('#submit-btn').on('click', function(event) {
 		  event.preventDefault();
 
 		  $('#display-latlong').empty();
 
-		  userAddress = $("#location").val().trim();
+		  userAddress = $('#location').val().trim();
 		   	console.log(userAddress);
 
 		  userAddress = encodeURIComponent(userAddress);
 
-		  var queryURL = queryURLBase +'/'+ '&place_name=' + userAddress +'.json?access_token=' + access_token;
+		  var queryURL = queryURLBase + '/' + '&place_name=' + userAddress + '.json?access_token=' + access_token;
 
 		  runQuery(queryURL);
 		});
