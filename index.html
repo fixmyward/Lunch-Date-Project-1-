@@ -124,6 +124,45 @@
 
           <!-- This main panel will hold each of the resulting articles -->
           <div class="panel-body" id="well-section">
+
+
+            
+            <div style="color: #bbb;">
+              TEST DATA: <br>
+              Test User Address: 160 Spear Street, San Francisco 94105 
+              (LAT: 37.791305, LONG: -122.393735)<br>
+              Test Restaurant Address: 1700 Fillmore Street, San Francisco 94115 
+              (LAT: 37.785367, LONG: -122.432862)
+            </div>
+
+             <form role="form">
+              <div style="width: 100%;">
+                User Location:<br>
+                <!-- <input type="text" class="form-control" placeholder="Your Street Address with City or Zip Code" id="user-location" value="160 Spear Street, San Francisco 94105"> -->
+                <input type="text" class="form-control" placeholder="User Latitude" id="user-lat" value="37.791305" style="width: 46%; margin-right: 10px; float: left;">
+                <input type="text" class="form-control" placeholder="User Longitude" id="user-lon" value="-122.393735" style="width: 46%; float: left;">
+              </div>
+              <div style="width: 100%; clear: both;">
+                Restaurant Address:<br>
+                <!-- <input type="text" class="form-control" placeholder="Restaurant Street Address with City or Zip Code" id="rest-location" value="1700 Fillmore Street, San Francisco 94115"> -->
+                <input type="text" class="form-control" placeholder="Restaurant Latitude" id="rest-lat" value="37.785367" style="width: 46%; margin-right: 10px; float: left;">
+                <input type="text" class="form-control" placeholder="Restaurant Longitude" id="rest-lon" value="-122.432862" style="width: 46%; float: left;">
+                <button type="submit" class="btn btn-default" id="submit-btn"><i class="fa fa-search"></i> Submit</button>
+              </div>
+            </form>
+
+            <br><br>
+            <div id="display-directions" style="display: none;">
+              <p><strong>Walking Directions:</strong></p>
+              <div id="display-direction"></div>
+            </div>
+
+          </div>
+
+
+
+
+
           </div>
         </div>
       </div>
