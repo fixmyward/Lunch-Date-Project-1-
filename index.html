@@ -6,7 +6,7 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+   <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
 <body>
@@ -32,29 +32,30 @@
 
               <div class="form-group">
                 <label for="search">Location</label>
-                <input type="text" class="form-control" id="location" placeholder="Enter your current location">
+                <input type="text" class="form-control" id="location" placeholder="Enter your address and city name or zip code">
                 <button type="submit" class="btn btn-default" id="location-btn"><i class="fa fa-search"></i> Search</button>
               </div>
 
               <!-- Here we capture the number of records that the user wants to retrieve  -->
-              <div class="form-group">
-                <label for="pwd">Choices of Cuisines</label>
+              <div class="form-group" id="cuisine-choice">
+                <label for="pwd">Choose cuisine</label>
                 <select class="form-control" id="search-cuisine">
+                  <option value="">Select</option>
                   <option value="73">Mexican</option>
-                  <option value="82">Italian</option>
-                  <option value="Mediterranean">Mediterranean</option>
-                  <option value="American">American</option>
-                  <option value="Japanese">Japanese</option>
-                  <option value="Korean">Korean</option>
+                  <option value="55">Italian</option>
+                  <option value="70">Mediterranean</option>
+                  <option value="1">American</option>
+                  <option value="60">Japanese</option>
+                  <option value="67">Korean</option>
                   <option value="95">Thai</option>
-                  <option value="French">French</option>
+                  <option value="45">French</option>
                   <option value="148">Indian</option>
-                  <option value="Vietnamese">Vietnamese</option>
-                  <option value="Fast Food">Fast Food</option>
-                  <option value="Chinese">Chinese</option>
-                  <option value="Hawaiian">Hawaiian</option>
+                  <option value="99">Vietnamese</option>
+                  <option value="40">Fast Food</option>
+                  <option value="25">Chinese</option>
+                  <option value="521">Hawaiian</option>
                 </select>
-                <button type="submit" class="btn btn-default" id="cuisines-btn"><i class="fa fa-search"></i> Search</button>
+                
               </div>
 
              
@@ -66,7 +67,7 @@
       </div>
     </div>
 
-  <div class = "row">
+  <div class = "row" id="restaurant-lists">
     <div class = "col-sm-8">
       <br>
       <div class="panel panel-primary">
@@ -111,7 +112,7 @@
       </div>
     </div>
 
-    <div class = "row">
+    <div class = "row" id="direction-row">
     <div class = "col-sm-12">
       <br>
       <div class="panel panel-primary">
@@ -128,7 +129,7 @@
       </div>
     </div>
 
-    <div class = "row">
+    <div class = "row" id="chat-row">
     <div class = "col-sm-12">
       <br>
       <div class="panel panel-primary">
@@ -167,7 +168,7 @@
 <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
 
 
-<script type="text/javascript" src="assets/javascript/app.js">
+<script type="text/javascript" src="app.js">
 </script>
 
 

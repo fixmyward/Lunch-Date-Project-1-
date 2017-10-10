@@ -40,3 +40,20 @@ p {
 
 } 
 
+.restaurant-thumb {
+  width: 75px;
+  float: right;
+  overflow: hidden;
+}
+
+.restaurant-thumb img {
+  width: auto;
+  max-height: 75px;
+}
+
+#cuisine-choice,
+#restaurant-lists,
+#direction-row,
+#chat-row {
+  display: none;
+}
