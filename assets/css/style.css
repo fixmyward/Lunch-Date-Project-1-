@@ -1,63 +1,116 @@
-.jumbotron {
-	text-align: center;
-	background-color: black;
-  color: #FFF;
+/*  
+    Lunch Date app CSS
+*/
 
+html, body {
+  min-height: 100%;
 }
-
+body {
+  background-image: url('https://st.depositphotos.com/3263277/4361/v/950/depositphotos_43614969-stock-illustration-food-pattern.jpg');
+}
 h3 {
   font-style: oblique;
 }
-
-
-.div1 {
-  width: 600px;
-  height: 200px;
-  border: 1px solid black;
-}
-
-li {
-  font-weight: bold;
-  font-size: 60px
-  font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
-  border-color: solid black;
-}
-
-
 p {
   font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
   font-size: 15px; 
 }
+input.form-control {
+  margin: 0 0 10px 0;
+}
+/*li {
+  font-weight: bold;
+  font-size: 60px
+  font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+  border-color: solid black;
+}*/
 
-
+#main-wrapper.container {
+  /* margin-bottom to match footer height */
+  margin-bottom: 48px;
+}
+.jumbotron {
+  text-align: center;
+  background-color: black;
+  color: #FFF;
+}
+#cuisine-choice,
+#restaurant-lists,
+#direction-row, 
+#display-directions, 
+#chat-row {
+  display: none;
+}
 .panel-heading {
   font-weight: bold;
   font-size: 20px;
-}
-
-#run-search1 {
-  float: right;
-
 } 
-
 .restaurant-thumb {
   width: 75px;
   float: right;
   overflow: hidden;
 }
-
 .restaurant-thumb img {
   width: auto;
   max-height: 75px;
 }
 
-#cuisine-choice,
-#restaurant-lists,
-#direction-row,
-#chat-row {
-  display: none;
+footer {
+  color: #c5ccb8;
+  background-color: rgba(102, 102, 102, 0.3);;
+  /*border-top: 1px solid #000;*/
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 48px;
+  padding: 10px 0 0 0;
+}
+.footer .panel {
+  border: 3px solid transparent;
+}
+.footer .panel-body {
+  padding: 10px;
+}
+#chat-heading {
+  cursor: pointer;
+}
+#chat-wrapper {
+  /*width: 80%;
+  margin: 20px auto;*/
+}
+#chat-area-outer {
+  margin: 0 0 10px 0;
+  padding: 8px 0 8px 8px;
+  border: 1px solid #ccc;
+}
+#chat-area {
+  height: 40px;
+  margin: 0;
+  padding: 0 8px 0 0;
+  overflow-y: auto;
+}
+#chat-area p {
+  margin: 0;
+  padding: 3px 0 0 0;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #4d5ea5;
+}
+#chat-entry {
+  width: 80%;
+  margin-right: 10px;
+  float: left;
 }
 
-body {
-  background-image: url(https://st.depositphotos.com/3263277/4361/v/950/depositphotos_43614969-stock-illustration-food-pattern.jpg);
+/*
+#run-search1 {
+  float: right;
 }
+.div1 {
+  width: 600px;
+  height: 200px;
+  border: 1px solid black;
+}
+*/
