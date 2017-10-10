@@ -1,87 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
+
+  <meta charset="UTF-8">
+  <!-- <link rel="shortcut icon" type="image/png" href="favicon.png"/> -->
   <title>Lunch Date</title>
-
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 <body>
 
-<div class = "container">
-  <div class="jumbotron">
-      <h1 class="text-centre"><span class="glyphicons glyphicons-fast-food">Lunch Date</span></h1>
-      <h3 class="text-centre">An app that facilitates two friends in nearby locations discussing and choosing a restaurant at which to share lunch, providing each user directions to the mutually selected restaurant.</h3>
-  </div>
+  <div id="main-wrapper" class="container">
 
-  <div class="row">
+    <div class="jumbotron">
+      <h1 class="text-centre"><span class="glyphicon glyphicon-cutlery"></span> Lunch Date</span></h1>
+      <p class="text-centre">Find and discuss nearby lunch options with a friend.</p>
+      <!-- <h3 class="text-centre">An app that facilitates two friends in nearby locations discussing and choosing a restaurant at which to share lunch, providing each user directions to the mutually selected restaurant.</h3> -->
+    </div>
+
+    <div class="row">
       <div class="col-sm-12">
-        <br>
-        <!-- First panel is for handling the search parameters -->
+
         <div class="panel panel-primary">
+
           <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa  fa-list-alt"></i>Search Parameters</strong></h3>
+            <h3 class="panel-title"><strong>Let's Find Something Tasty for Lunch</strong></h3>
           </div>
+
           <div class="panel-body">
 
-            <!-- Here we create an HTML Form for handling the inputs-->
             <form role="form">
 
               <div class="form-group">
                 <label for="search">Location</label>
-                <input type="text" class="form-control" id="location" placeholder="Enter your current location">
-                <button type="submit" class="btn btn-default" id="location-btn"><i class="fa fa-search"></i> Search</button>
+                <input type="text" class="form-control" id="location" placeholder="Enter your address and city name or zip code">
+                <button type="submit" class="btn btn-primary" id="location-btn"><i class="fa fa-search"></i> Search</button>
               </div>
 
-              <!-- Here we capture the number of records that the user wants to retrieve  -->
-              <div class="form-group">
-                <label for="pwd">Choices of Cuisines</label>
+              <div class="form-group" id="cuisine-choice">
+                <label for="pwd">Choose a Cuisine</label>
                 <select class="form-control" id="search-cuisine">
+                  <option value="">Select</option>
                   <option value="73">Mexican</option>
-                  <option value="82">Italian</option>
-                  <option value="Mediterranean">Mediterranean</option>
-                  <option value="American">American</option>
-                  <option value="Japanese">Japanese</option>
-                  <option value="Korean">Korean</option>
+                  <option value="55">Italian</option>
+                  <option value="70">Mediterranean</option>
+                  <option value="1">American</option>
+                  <option value="60">Japanese</option>
+                  <option value="67">Korean</option>
                   <option value="95">Thai</option>
-                  <option value="French">French</option>
+                  <option value="45">French</option>
                   <option value="148">Indian</option>
-                  <option value="Vietnamese">Vietnamese</option>
-                  <option value="Fast Food">Fast Food</option>
-                  <option value="Chinese">Chinese</option>
-                  <option value="Hawaiian">Hawaiian</option>
+                  <option value="99">Vietnamese</option>
+                  <option value="40">Fast Food</option>
+                  <option value="25">Chinese</option>
+                  <option value="521">Hawaiian</option>
                 </select>
-                <button type="submit" class="btn btn-default" id="cuisines-btn"><i class="fa fa-search"></i> Search</button>
               </div>
-
-             
-             
 
             </form>
+
           </div>
         </div>
+
       </div>
     </div>
 
-  <div class = "row">
-    <div class = "col-sm-8">
-      <br>
-      <div class="panel panel-primary">
+    <div class = "row" id="restaurant-lists">
+      <div class = "col-sm-8">
+        
+        <div class="panel panel-primary">
 
-          <!-- Panel Heading for the retrieved articles box -->
           <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa fa-table"></i>Lists of Restaurants</strong></h3>
+            <h3 class="panel-title"><strong>Here Are Your Nearby Options</strong></h3>
           </div>
 
-          <!-- This main panel will hold each of the resulting articles -->
           <div class="panel-body" id="results-section">
 
-
             <!-- <div class="panel panel-default">
-              <button type="submit" class="btn btn-default" id="run-search1"><i class="fa fa-search"></i> Select</button>
+              <button type="submit" class="btn btn-primary" id="run-search1"><i class="fa fa-search"></i> Select</button>
 
               <div class="panel-heading">BigFish Little Fish</div>
                 <div class="panel-body">
@@ -91,86 +89,103 @@
                    <p><a href="www.bigfishlittlefish.com">Menu</a></p>
                 </div>
               </div> -->
-              
-            
-      
+
           </div>
         </div>
       </div>
 
-       <div class="col-sm-4">
-        <br>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa fa-table"></i>Pin Down Map</strong></h3>
+      <div class="col-sm-4">
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Pin Down Map</strong></h3>
+          </div>
+          <div class="panel-body" id="well-section">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class = "row" id="direction-row">
+      <div class = "col-sm-12">
+          
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Walking Directions</strong></h3>
+          </div>
+
+          <div class="panel-body" id="well-section">
+
+            <form role="form">
+              <div style="width: 100%;">
+                User Location:<br>
+                <!-- <input type="text" class="form-control" placeholder="Your Street Address with City or Zip Code" id="user-location" value="160 Spear Street, San Francisco 94105"> -->
+                <input type="text" class="form-control" placeholder="User Latitude" id="user-lat" value="37.791305" style="width: 46%; margin-right: 10px; float: left;">
+                <input type="text" class="form-control" placeholder="User Longitude" id="user-lon" value="-122.393735" style="width: 46%; float: left;">
+              </div>
+              <div style="width: 100%; clear: both;">
+                Restaurant Address:<br>
+                <!-- <input type="text" class="form-control" placeholder="Restaurant Street Address with City or Zip Code" id="rest-location" value="1700 Fillmore Street, San Francisco 94115"> -->
+                <input type="text" class="form-control" placeholder="Restaurant Latitude" id="rest-lat" value="37.785367" style="width: 46%; margin-right: 10px; float: left;">
+                <input type="text" class="form-control" placeholder="Restaurant Longitude" id="rest-lon" value="-122.432862" style="width: 46%; float: left;">
+                <button type="submit" class="btn btn-primary" id="directions-btn"><i class="fa fa-search"></i> Get Directions</button>
+              </div>
+            </form>
+
+            <div id="display-directions">
+              <br><br>
+              <!-- <p><strong>Steps Away:</strong></p> -->
+              <div id="display-direction"></div>
             </div>
 
-          <div class="panel-body" id="well-section">
           </div>
+
         </div>
+
       </div>
     </div>
 
-    <div class = "row">
-    <div class = "col-sm-12">
-      <br>
-      <div class="panel panel-primary">
+  </div>
 
-          <!-- Panel Heading for the retrieved articles box -->
-          <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa fa-table"></i>Directions</strong></h3>
-          </div>
+  <footer class="footer">
+    <div class="container">
 
-          <!-- This main panel will hold each of the resulting articles -->
-          <div class="panel-body" id="well-section">
+      <div class = "row">
+        <div class = "col-sm-12">
+            
+          <div class="panel panel-primary">
+
+            <div class="panel-heading collapsed" id="chat-heading" title="Click to open chat">
+              <h3 class="panel-title"><strong>Chat with a Friend About Lunch Plans</strong></h3>
+            </div>
+
+            <div class="panel-body">
+              
+              <div id="chat-wrapper">
+                <div id="chat-area-outer">
+                  <div id="chat-area"></div>
+                </div>
+                <input type="text" class="form-control" id="chat-entry" placeholder="Enter Message">
+                <!-- <input type="submit" id="send-button" value="Send"> -->
+                <button type="submit" class="btn btn-primary" id="send-button">Send</button>
+              </div>
+
+            </div>
+
           </div>
         </div>
+
       </div>
+
     </div>
+  </footer>
 
-    <div class = "row">
-    <div class = "col-sm-12">
-      <br>
-      <div class="panel panel-primary">
-
-          <!-- Panel Heading for the retrieved articles box -->
-          <div class="panel-heading">
-            <h3 class="panel-title"><strong><i class="fa fa-table"></i>Chat Box</strong></h3>
-          </div>
-
-          <!-- This main panel will hold each of the resulting articles -->
-          <div class="panel-body" id="well-section">
-             <div class="col-lg-12">
-              <div class="div1">This div is smaller (width is 600px and height is 200px).</div>
-        <br>
-          <div class="input-group">
-             <input type="text" class="form-control" placeholder="Type your chat here">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Enter</button>
-              </span>
-          </div>
-        </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-
-  
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-</script>
-
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
-
-
-<script type="text/javascript" src="assets/javascript/app.js">
-</script>
-
-
+<script type="text/javascript" src="assets/javascript/app.js"></script>
 
 </body>
 </html>
