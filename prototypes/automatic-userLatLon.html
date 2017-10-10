@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset=utf-8 />
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet' />
+<style>
+  body { margin:0; padding:0; }
+  #map { position:absolute; top:0; bottom:0; width:100%; }
+</style>
+<br><br>
+<div id='map'></div>
+<div id='lat-lon'></div>
+<script src="https://code.jquery.com/jquery.js"></script>
+
+  <!-- LINK TO FIREBASE GOES HERE -->
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+
+  //var lat = 0;
+  //var lon = 0;
+ 
+  navigator.geolocation.watchPosition(render);
+  
+  function render(pos) {
+       var lat = pos.coords.latitude;
+
+       var lon = pos.coords.longitude;
+
+
+       var map = L.mapbox.map('map')
+          .setView([lat, lon], 1);
+
+        //'map', 'examples.map-20v6611k'
+       
+       $('#map').append("<br>");
+       $('#map').append("<br>");
+       $('#map').append("<br>");
+       $('#map').append("user Lat: " +lat);
+       $('#map').append("<br>")
+       $('#map').append("user lon: " +lon);    
+                      
+   };
+      
+</script>
+</body>
+</html>
