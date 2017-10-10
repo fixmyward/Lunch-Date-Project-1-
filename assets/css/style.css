@@ -76,6 +76,15 @@ footer {
 #chat-heading {
   cursor: pointer;
 }
+#chat-heading.panel-heading h3:after {
+  font-family: 'Glyphicons Halflings';  
+  content: '\e114';
+  color: #fff;
+  float: right;
+}
+#chat-heading.panel-heading.collapsed h3:after {
+  content: '\e080';
+}
 #chat-wrapper {
   /*width: 80%;
   margin: 20px auto;*/

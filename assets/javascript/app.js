@@ -221,10 +221,12 @@ $(document).ready(function() {
       $('.footer').css('height', openHeight);
       $('.container').css('margin-bottom', openHeight);
       $(this).attr('title', 'Click to close chat');
+      $(this).toggleClass('collapsed');
     } else {
       $('.footer').css('height', closedHeight);
       $('.container').css('margin-bottom', closedHeight);
       $(this).attr('title', 'Click to open chat');
+      $(this).toggleClass('collapsed');
     }
   });
 
