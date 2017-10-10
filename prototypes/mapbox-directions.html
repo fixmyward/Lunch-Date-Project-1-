@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mapbox API prototype - Directions</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style>
+  	input {
+  		margin: 10px 0;
+  	}
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="jumbotron" style="background-color: #337ab7; color: #fff;">
+      <h2 class="text-center"><strong><span class="glyphicon glyphicon-map-marker"></span> Mapbox API Prototyping — Directions</strong>
+      <p><a href="https://docs.google.com/document/d/1PQPgRwO9DvEastm3IRZoy6MZkn9RRP-yyEdNMpsNK18/edit#" target="_blank" style="color: #fff;">"Lunch Date" Project Google Doc</a></p></h2>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <br>
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong><i class="fa fa-list-alt"></i> Get Walking Directions Between User and Restaurant Location</strong></h3>
+          </div>
+          <div class="panel-body">
+
+						<div style="color: #bbb;">
+							TEST DATA: <br>
+							Test User Address: 160 Spear Street, San Francisco 94105 
+							(LAT: 37.791305, LONG: -122.393735)<br>
+							Test Restaurant Address: 1700 Fillmore Street, San Francisco 94115 
+							(LAT: 37.785367, LONG: -122.432862)
+						</div>
+
+	           <form role="form">
+	           	<div style="width: 100%;">
+							  User Location:<br>
+							  <!-- <input type="text" class="form-control" placeholder="Your Street Address with City or Zip Code" id="user-location" value="160 Spear Street, San Francisco 94105"> -->
+							  <input type="text" class="form-control" placeholder="User Latitude" id="user-lat" value="37.791305" style="width: 46%; margin-right: 10px; float: left;">
+							  <input type="text" class="form-control" placeholder="User Longitude" id="user-lon" value="-122.393735" style="width: 46%; float: left;">
+						  </div>
+						  <div style="width: 100%; clear: both;">
+							  Restaurant Address:<br>
+							  <!-- <input type="text" class="form-control" placeholder="Restaurant Street Address with City or Zip Code" id="rest-location" value="1700 Fillmore Street, San Francisco 94115"> -->
+							  <input type="text" class="form-control" placeholder="Restaurant Latitude" id="rest-lat" value="37.785367" style="width: 46%; margin-right: 10px; float: left;">
+							  <input type="text" class="form-control" placeholder="Restaurant Longitude" id="rest-lon" value="-122.432862" style="width: 46%; float: left;">
+							  <button type="submit" class="btn btn-default" id="submit-btn"><i class="fa fa-search"></i> Submit</button>
+						  </div>
+						</form>
+
+						<br><br>
+						<div id="display-directions" style="display: none;">
+							<p><strong>Walking Directions:</strong></p>
+							<div id="display-direction"></div>
+						</div>
+
+        	</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+
+		var access_token = 'pk.eyJ1IjoibWFodGFiMTIiLCJhIjoiY2o4ZXppdDRrMTh0dTMzbXNjY3NoMnN0OCJ9.6jXHANiUibQbeXNIljgFUQ';
+
+		var userAddress = '';
+		var userLat = '';
+		var userLon = '';
+		var restAddress = '';
+		var restLat = '';
+		var restLon = '';
+		var steps = true;
+		var stepCount = 1;
+
+		var queryURLBase = 'https://api.mapbox.com/directions/v5/mapbox/walking/';
+
+		function runQuery(queryURL) {
+
+			$.ajax({
+		    url: queryURL,
+		    method: 'GET'
+		  }).done(function(directionData) {	 
+		  		// console.log(directionData);
+
+		  	stepsLength = directionData.routes[0].legs[0].steps.length;
+		  		//console.log('stepsLength: ' + stepsLength);
+
+		  	for (i = 0; i < stepsLength; i++) {
+
+			    userDirection = directionData.routes[0].legs[0].steps[i].maneuver.instruction;
+					
+			    $('#display-direction').append('<p><span class="label label-primary">' +
+            stepCount + '</span> ' + userDirection + '</p>');
+
+			    stepCount++;
+
+	   		}
+
+	   		$('#display-direction').append('<p><strong>Enjoy your lunch date!</strong></p>');
+			    
+			  $('#display-directions').show();
+
+		  });
+		};
+
+		$('#submit-btn').on('click', function(event) {
+		  event.preventDefault();
+
+		  $('#display-direction').empty();
+
+		  userLat = $('#user-lat').val().trim();
+		   	console.log(userLat);
+		  userLon = $('#user-lon').val().trim();
+		   	console.log(userLon);
+
+		  restLat = $('#rest-lat').val().trim();
+		   	console.log(restLat);
+		  restLon = $('#rest-lon').val().trim();
+		   	console.log(restLon);
+
+		  //userAddress = encodeURIComponent(userAddress);
+		  
+		  // https://api.mapbox.com/directions/v5/mapbox/cycling/-122.42,37.78;-77.03,38.91?steps=true&alternatives=true&access_token=your-access-token
+		  queryURL = queryURLBase + userLon + ',' + userLat + 
+		  	';' + restLon + ',' + restLat + 
+		  	'?access_token=' + access_token + '&steps=' + steps;
+
+				// console.log(queryURL);
+
+			// $('#display-directions').append('Click to see directions JSON: <a href="' + queryURL + '" target="_blank">https://api.mapbox.com/directions/v5/mapbox/walking/...</a>');
+
+		  runQuery(queryURL);
+		});
+	 
+	</script>
+
+</body>
+</html>
+
