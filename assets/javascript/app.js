@@ -197,21 +197,12 @@ $(document).ready(function() {
   $(document).on('click', '#results-section button', function(event) {
     
     event.preventDefault();
-    console.log($(this).closest('.restaurant').attr('data-latitude'));
-    restLat = $(this).closest('.restaurant').attr('data-latitude');
-    restLon = $(this).closest('.restaurant').attr('data-longitude');
 
     $('#display-direction').empty();
+    stepCount = 1;
 
-    // userLat = $('#user-lat').val().trim();
-    //   console.log(userLat);
-    // userLon = $('#user-lon').val().trim();
-    //   console.log(userLon);
-
-    // restLat = $('#rest-lat').val().trim();
-    //   console.log(restLat);
-    // restLon = $('#rest-lon').val().trim();
-    //   console.log(restLon);
+    restLat = $(this).closest('.restaurant').attr('data-latitude');
+    restLon = $(this).closest('.restaurant').attr('data-longitude');
 
     directionsQueryURL = directionsQueryURLBase + userLongitude + ',' + userLatitude + 
       ';' + restLon + ',' + restLat + 
