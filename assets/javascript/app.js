@@ -213,6 +213,8 @@ $(document).ready(function() {
 /* 
     Chat -------------------
 */
+
+  // Chat header behavior
   var closedHeight = 48;
   var openHeight = 170;
   $('#chat-heading').on('click', function(event) {
@@ -228,6 +230,129 @@ $(document).ready(function() {
       $(this).attr('title', 'Click to open chat');
       $(this).toggleClass('collapsed');
     }
+  });
+  // Initialize Firebase for Chat
+  var config = {
+    apiKey: "AIzaSyACuYdpSh6e2wKU0XFX2Cc60C88e_oVKck",
+    authDomain: "lunch-date-14315.firebaseapp.com",
+    databaseURL: "https://lunch-date-14315.firebaseio.com",
+    projectId: "lunch-date-14315",
+    storageBucket: "",
+    messagingSenderId: "759801042798"
+  };
+  firebase.initializeApp(config);
+
+  var database =  firebase.database();
+  var playersRef = database.ref('/players');
+  var chatRef = database.ref('/chat');
+
+  var playerId = 0;
+  var playerSet = false;
+  var name = '';
+
+  // Chat listeners
+  chatRef.on('child_removed', function(chatSnapshot) {
+    $('#chat-area').empty();
+    $('#chat-area').html('The other player has disconnected.');
+    setTimeout(function() {
+      $('#chat-area').empty();
+    }, 3000);
+  });
+  chatRef.on('child_added', function(chatSnapshot) {
+
+    if (playerSet) {
+      if (chatSnapshot.val()) {
+
+        var chatPlayer = chatSnapshot.val().playerId; 
+        var chatName = chatSnapshot.val().name; 
+        var chatMessage = chatSnapshot.val().message;
+        var newChat = $('<p>')
+          .addClass('playerid-' + chatPlayer)
+          .html('<span class="chat-name">' + chatName + ':</span> ' + chatMessage);
+        $('#chat-area').append(newChat);
+        $('#chat-area').scrollTop($('#chat-area')[0].scrollHeight);
+      }
+    }
+
+  }, function(errorObject) {
+    console.log("The chat read failed: " + errorObject.code);
+  });
+
+  // User listener
+  playersRef.on('value', function(playersSnapshot) {
+    var playersNum = playersSnapshot.numChildren();
+
+    if (!playerSet) {
+      if (playersSnapshot.child('1').exists()) {
+        playerId = 2;
+      } else {
+        playerId = 1;
+      }
+    }
+
+  }, function(errorObject) {
+    console.log("The player read failed: " + errorObject.code);
+  });
+
+
+  function writeChatData(playerId, name, message) {
+    firebase.database().ref('chat').push({
+      playerId: playerId,
+      name: name,
+      message: message,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+  }
+
+  function writeUserData(playerId, name) {
+    firebase.database().ref('players/' + playerId).set({
+      name: name
+    });
+  }
+
+  // Chat send button
+  $('#send-button').on('click', function() {
+
+    if (playerSet) {
+
+      // Do nothing if no message entered
+      if ($('#chat-entry').val() !== '') {
+
+        message = $('#chat-entry').val().trim();
+
+        // Clear previous message
+        $('#chat-entry').val('');
+
+        writeChatData(playerId, name, message);
+
+        chatRef.onDisconnect().remove();
+
+      }
+    }
+  });
+
+  // User start button, for enter name
+  $('#start-button').on('click', function() {
+
+    playerSet = true;
+
+    name = $('#enter-name').val().trim();
+      console.log(name);
+
+    // Hide start/name element & show chat elements
+    $('#start-chat').hide();
+    $('#chat-wrapper').show();
+    $('#player-name').text(name);
+    $('#player-number').text(playerId);
+    $('#player-info, #player-id').show();
+
+    // Clear previous name value in input
+    $('#enter-name').val('');
+
+    writeUserData(playerId, name);
+
+    playerRef = playersRef.child(playerId);
+    playerRef.onDisconnect().remove();
   });
 
 });

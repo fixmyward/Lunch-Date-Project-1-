@@ -38,7 +38,9 @@ input.form-control {
 #restaurant-lists,
 #direction-row, 
 #display-directions, 
-#chat-row {
+#chat-row,
+#player-info, 
+#chat-wrapper {
   display: none;
 }
 .panel-heading {
@@ -68,6 +70,7 @@ footer {
   padding: 10px 0 0 0;
 }
 .footer .panel {
+  min-height: 160px;
   border: 3px solid transparent;
 }
 .footer .panel-body {
@@ -84,6 +87,11 @@ footer {
 }
 #chat-heading.panel-heading.collapsed h3:after {
   content: '\e080';
+}
+#chat-entry {
+  width: 80%;
+  margin-right: 10px;
+  float: left;
 }
 #chat-wrapper {
   /*width: 80%;
@@ -102,15 +110,16 @@ footer {
 }
 #chat-area p {
   margin: 0;
-  padding: 3px 0 0 0;
+  padding: 5px 0 0 0;
   font-size: 14px;
   line-height: 1.3;
   color: #4d5ea5;
 }
-#chat-entry {
-  width: 80%;
-  margin-right: 10px;
-  float: left;
+#chat-area p.playerid-2 {
+  color: #666b82;
+}
+.chat-name {
+  font-weight: bold;
 }
 
 /*
