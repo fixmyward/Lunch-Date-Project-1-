@@ -55,8 +55,8 @@ $(document).ready(function() {
   var apiKey = '9d1904342e147305e39dc198de1e915c';
 
   var searchCuisine = '';
-  var searchRadius = '400';
-  var numResults = '5';
+  // var searchRadius = '3000';
+  var numResults = '10';
   var resultCounter = 0;
 
   var restaurantQueryURLBase = "https://developers.zomato.com/api/v2.1/search?apikey=" + apiKey;
@@ -135,11 +135,14 @@ $(document).ready(function() {
     $('#results-section').empty();
 
     searchCuisine = $('#search-cuisine').val();
-    
+      console.log("--------")
+      console.log(userAddress)
+
+
       console.log(userLongitude);
       console.log(userLatitude);
-
-    var restaurantQueryURL = restaurantQueryURLBase + '&lat=' + userLatitude + '&lon=' + userLongitude + '&cuisines=' + searchCuisine + '&radius=' + searchRadius + '&count=' + numResults;
+      console.log("--------")
+    var restaurantQueryURL = restaurantQueryURLBase + '&lat=' + userLatitude + '&lon=' + userLongitude + '&cuisines=' + searchCuisine + '&count=' + numResults;
 
     runRestaurantQuery(numResults, restaurantQueryURL);
 
