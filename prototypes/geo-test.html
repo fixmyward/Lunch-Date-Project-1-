@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Geolocating test</title>
+</head>
+<body>
+
+<script>
+if ('geolocation' in navigator) {
+  /* geolocation is available */
+    console.log('"geolocation" is available in navigator');
+} else {
+  /* geolocation IS NOT available */
+    console.log('ELSE "geolocation" is NOT available in navigator');
+}
+
+navigator.geolocation.getCurrentPosition(function(position) {
+  // do_something(position.coords.latitude, position.coords.longitude);
+  console.log('position.coords.latitude: ' + position.coords.latitude);
+  console.log('position.coords.longitude: ' + position.coords.longitude);
+});
+
+</script>
+
+</body>
+</html>

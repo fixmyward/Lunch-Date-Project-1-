@@ -4,13 +4,28 @@
 
 $(document).ready(function() {
 
+  var userLatitude = '';
+  var userLongitude = '';
+/* 
+    navigator.geolocation  -------------------
+*/
+  navigator.geolocation.getCurrentPosition(function(position) {
+    userLatitude = position.coords.latitude;
+    userLongitude = position.coords.longitude;
+    $('#geolocating-now').hide();
+    $('#cuisine-choice').show();
+  },
+  function (error) { 
+    if (error.code == error.PERMISSION_DENIED)
+      $('#geolocating-now').hide();
+      $("#location-address").show();
+  });
+
 /* 
     Mapbox Places API -------------------
 */
   var access_token = 'pk.eyJ1IjoibWFodGFiMTIiLCJhIjoiY2o4ZXppdDRrMTh0dTMzbXNjY3NoMnN0OCJ9.6jXHANiUibQbeXNIljgFUQ';
   var userAddress = '';
-  var userLatitude = '';
-  var userLongitude = '';
   var locationQueryURLBase = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 
   function runLocationQuery(locationQueryURL) {
@@ -22,9 +37,6 @@ $(document).ready(function() {
 
       userLongitude = locationData.features[0].center[0];
       userLatitude = locationData.features[0].center[1];
-      console.log(userLongitude);
-      console.log(userLatitude);
-      console.log("------------");
 
     });
 
@@ -37,7 +49,6 @@ $(document).ready(function() {
     $('#display-latlong').empty();
 
     userAddress = $('#location').val().trim();
-         console.log(userAddress);
 
     userAddress = encodeURIComponent(userAddress);
 
@@ -66,8 +77,6 @@ $(document).ready(function() {
       url: restaurantQueryURL,
       method: 'GET'
     }).done(function(zomatoData) {
-
-      console.log('restaurantQueryURL: ' + restaurantQueryURL);
 
       // Loop through and provide the correct number of results
       for (var i = 0; i < numResults; i++) {
@@ -129,13 +138,7 @@ $(document).ready(function() {
     $('#results-section').empty();
 
     searchCuisine = $('#search-cuisine').val();
-      console.log("--------")
-      console.log(userAddress)
 
-
-      console.log(userLongitude);
-      console.log(userLatitude);
-      console.log("--------")
     var restaurantQueryURL = restaurantQueryURLBase + '&lat=' + userLatitude + '&lon=' + userLongitude + '&cuisines=' + searchCuisine + '&count=' + numResults;
 
     runRestaurantQuery(numResults, restaurantQueryURL);
@@ -160,11 +163,9 @@ $(document).ready(function() {
     $.ajax({
       url: directionsQueryURL,
       method: 'GET'
-    }).done(function(directionData) {  
-        // console.log(directionData);
+    }).done(function(directionData) { 
 
       stepsLength = directionData.routes[0].legs[0].steps.length;
-        //console.log('stepsLength: ' + stepsLength);
 
       for (i = 0; i < stepsLength; i++) {
 
@@ -334,7 +335,6 @@ $(document).ready(function() {
     playerSet = true;
 
     name = $('#enter-name').val().trim();
-      console.log(name);
 
     // Hide start/name element & show chat elements
     $('#start-chat').hide();

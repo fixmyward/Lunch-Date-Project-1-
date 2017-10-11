@@ -33,16 +33,20 @@
 
             <form role="form">
 
-              <div class="form-group">
-                <label for="search">Location</label>
+              <div id="geolocating-now">
+                <p><img src="assets/images/loading_spinner.gif" class="spinner"> Lunch Date is calculating your location to find restaurants near you.</p>
+              </div>
+
+              <div class="form-group" id="location-address">
+                <label for="search">Lunch Date needs a street address to find tasty restaurants near you</label>
                 <input type="text" class="form-control" id="location" placeholder="Enter your address and city name or zip code">
                 <button type="submit" class="btn btn-primary" id="location-btn"><i class="fa fa-search"></i> Search</button>
               </div>
 
               <div class="form-group" id="cuisine-choice">
-                <label for="pwd">Choose a Cuisine</label>
+                <label for="pwd">What are you hungry for?</label>
                 <select class="form-control" id="search-cuisine">
-                  <option value="">Select</option>
+                  <option value="">Choose a Cuisine</option>
                   <option value="73">Mexican</option>
                   <option value="55">Italian</option>
                   <option value="70">Mediterranean</option>

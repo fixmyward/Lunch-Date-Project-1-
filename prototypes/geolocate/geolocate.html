@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="UTF-8">
+  <!-- <link rel="shortcut icon" type="image/png" href="favicon.png"/> -->
+  <title>Lunch Date</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.1/mapbox.css' rel='stylesheet' />
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+  <div id='map'></div>
+
+  <div id="main-wrapper" class="container">
+
+    <div class="jumbotron">
+      <h1 class="text-centre"><span class="glyphicon glyphicon-cutlery"></span> Lunch Date</span></h1>
+      <p class="text-centre">Find and discuss nearby lunch options with a friend.</p>
+      <!-- <h3 class="text-centre">An app that facilitates two friends in nearby locations discussing and choosing a restaurant at which to share lunch, providing each user directions to the mutually selected restaurant.</h3> -->
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Let's Find Something Tasty for Lunch</strong></h3>
+          </div>
+
+          <div class="panel-body">
+
+            <form role="form">
+
+          <!--     <div class="form-group">
+                <label for="search">Location</label>
+                <input type="text" class="form-control" id="location" placeholder="Enter your address and city name or zip code">
+                <button type="submit" class="btn btn-primary" id="location-btn"><i class="fa fa-search"></i> Search</button>
+              </div> -->
+
+              <div class="form-group" id="cuisine-choice">
+                <label for="pwd">Choose a Cuisine</label>
+                <select class="form-control" id="search-cuisine">
+                  <option value="">Select</option>
+                  <option value="73">Mexican</option>
+                  <option value="55">Italian</option>
+                  <option value="70">Mediterranean</option>
+                  <option value="1">American</option>
+                  <option value="60">Japanese</option>
+                  <option value="67">Korean</option>
+                  <option value="95">Thai</option>
+                  <option value="45">French</option>
+                  <option value="148">Indian</option>
+                  <option value="99">Vietnamese</option>
+                  <option value="40">Fast Food</option>
+                  <option value="25">Chinese</option>
+                  <option value="521">Hawaiian</option>
+                </select>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class = "row" id="restaurant-lists">
+      <div class = "col-sm-12">
+        
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Here Are Your Nearby Options</strong></h3>
+          </div>
+
+          <div class="panel-body" id="results-section">
+
+            <!-- <div class="panel panel-default">
+              <button type="submit" class="btn btn-primary" id="run-search1"><i class="fa fa-search"></i> Select</button>
+
+              <div class="panel-heading">BigFish Little Fish</div>
+                <div class="panel-body">
+                  <p>111 Spear St. Ste B09, San Francisco, CA 94105</p>
+                  <p>Hours: 8:00 am - 9:00 pm</p>
+                  <p>4 ratings <a href="www.bigfishlittlefish.com">(34 reviews)</a></p>
+                   <p><a href="www.bigfishlittlefish.com">Menu</a></p>
+                </div>
+              </div> -->
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class = "row" id="direction-row">
+      <div class = "col-sm-12">
+          
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Walking Directions</strong></h3>
+          </div>
+
+          <div class="panel-body" id="well-section">
+
+            <form role="form">
+              <div style="width: 100%;">
+                User Location:<br>
+                <!-- <input type="text" class="form-control" placeholder="Your Street Address with City or Zip Code" id="user-location" value="160 Spear Street, San Francisco 94105"> -->
+                <input type="text" class="form-control" placeholder="User Latitude" id="user-lat" value="37.791305" style="width: 46%; margin-right: 10px; float: left;">
+                <input type="text" class="form-control" placeholder="User Longitude" id="user-lon" value="-122.393735" style="width: 46%; float: left;">
+              </div>
+              <div style="width: 100%; clear: both;">
+                Restaurant Address:<br>
+                <!-- <input type="text" class="form-control" placeholder="Restaurant Street Address with City or Zip Code" id="rest-location" value="1700 Fillmore Street, San Francisco 94115"> -->
+                <input type="text" class="form-control" placeholder="Restaurant Latitude" id="rest-lat" value="37.785367" style="width: 46%; margin-right: 10px; float: left;">
+                <input type="text" class="form-control" placeholder="Restaurant Longitude" id="rest-lon" value="-122.432862" style="width: 46%; float: left;">
+                <button type="submit" class="btn btn-primary" id="directions-btn"><i class="fa fa-search"></i> Get Directions</button>
+              </div>
+            </form>
+
+            <div id="display-directions">
+              <br><br>
+              <!-- <p><strong>Steps Away:</strong></p> -->
+              <div id="display-direction"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+
+      <div class = "row">
+        <div class = "col-sm-12">
+            
+          <div class="panel panel-primary">
+
+            <div class="panel-heading collapsed" id="chat-heading" title="Click to open chat">
+              <h3 class="panel-title"><strong>Chat with a Friend About Lunch Plans</strong></h3>
+            </div>
+
+            <div class="panel-body">
+              
+              <div id="chat-wrapper">
+                <div id="chat-area-outer">
+                  <div id="chat-area"></div>
+                </div>
+                <input type="text" class="form-control" id="chat-entry" placeholder="Enter Message">
+                <!-- <input type="submit" id="send-button" value="Send"> -->
+                <button type="submit" class="btn btn-primary" id="send-button">Send</button>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.5.0/firebase.js"></script>
+<script type="text/javascript" src="app1.js"></script>
+
+</body>
+</html>
