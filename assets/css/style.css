@@ -64,6 +64,10 @@ img.spinner {
   width: auto;
   max-height: 75px;
 }
+#chosen-restaurant-name {
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
 
 footer {
   color: #c5ccb8;

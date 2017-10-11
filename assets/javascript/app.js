@@ -97,6 +97,7 @@ $(document).ready(function() {
         resultSection.addClass('restaurant');
         resultSection.attr('data-longitude', restaurantLong);
         resultSection.attr('data-latitude', restaurantLat);
+        resultSection.attr('data-name', restaurantName);
         resultSection.attr('id', 'result-' + resultCounter);
         $('#results-section').append(resultSection);
 
@@ -120,8 +121,15 @@ $(document).ready(function() {
 
         // Then display the remaining fields
         $('#result-' + resultCounter)
-          .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>').append('<button type="submit" class="btn btn-primary" id="submit-btn">Get Directions</button>');
+          .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>')
+          .append('<button type="submit" class="btn btn-primary" id="submit-btn">Get Directions</button>');
       }
+
+      $("#restaurant-lists").show();
+
+      $('html, body').animate({
+        scrollTop: $('#restaurant-lists').offset().top
+      }, 2000);
 
 
     });
@@ -143,8 +151,6 @@ $(document).ready(function() {
 
     runRestaurantQuery(numResults, restaurantQueryURL);
 
-    $("#restaurant-lists").show();
-
   });
 
 /* 
@@ -153,6 +159,7 @@ $(document).ready(function() {
   var restAddress = '';
   var restLat = '';
   var restLon = '';
+  var restName = '';
   var steps = true;
   var stepCount = 1;
 
@@ -182,11 +189,12 @@ $(document).ready(function() {
         
       $('#direction-row, #display-directions').show();
 
+      $('#chosen-restaurant-name').text(restName);
       $('#steps-away').text(stepCount - 1);
-
+      
       $('html, body').animate({
-            scrollTop: $('#direction-row').offset().top
-        }, 2000);
+        scrollTop: $('#direction-row').offset().top
+      }, 2000);
 
     });
   };
@@ -200,6 +208,7 @@ $(document).ready(function() {
 
     restLat = $(this).closest('.restaurant').attr('data-latitude');
     restLon = $(this).closest('.restaurant').attr('data-longitude');
+    restName = $(this).closest('.restaurant').attr('data-name');
 
     directionsQueryURL = directionsQueryURLBase + userLongitude + ',' + userLatitude + 
       ';' + restLon + ',' + restLat + 
@@ -210,7 +219,7 @@ $(document).ready(function() {
   });
 
 /* 
-    Chat -------------------
+    Firebase Chat -------------------
 */
   // Chat header behavior
   var closedHeight = 48;
