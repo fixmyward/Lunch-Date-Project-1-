@@ -31,7 +31,7 @@ input.form-control {
 }
 .jumbotron {
   text-align: center;
-  background-color: black;
+  background-image: url(http://www.powerpointhintergrund.com/uploads/food-background-2.jpg);
   color: #FFF;
 }
 #cuisine-choice,
@@ -132,3 +132,18 @@ footer {
   border: 1px solid black;
 }
 */
+.panel-heading {
+  background-image: url(https://images.template.net/wp-content/uploads/2016/04/22073227/Attractive-Soft-Wooden-Background.jpg);
+}
+
+.btn-primary,
+#chat-heading {
+  background-image: url(https://us.123rf.com/450wm/yuliyagontar/yuliyagontar1603/yuliyagontar160300210/54733180-granola-in-vintage-mug-dark-berries-and-honey-for-delicious-breakfast-on-grunge-background-with-spac.jpg?ver=6);
+}
+
+
+#heading-word,
+#title-word {
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
+}
