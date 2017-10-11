@@ -55,8 +55,8 @@ $(document).ready(function() {
   var apiKey = '9d1904342e147305e39dc198de1e915c';
 
   var searchCuisine = '';
-  var searchRadius = '400';
-  var numResults = '5';
+  // var searchRadius = '3000';
+  var numResults = '10';
   var resultCounter = 0;
 
   var restaurantQueryURLBase = "https://developers.zomato.com/api/v2.1/search?apikey=" + apiKey;
@@ -81,10 +81,14 @@ $(document).ready(function() {
         var restaurantAggRating = zomatoData.restaurants[i].restaurant.user_rating.aggregate_rating;
         var restaurantMenu = zomatoData.restaurants[i].restaurant.menu_url;
         var restaurantThumb = zomatoData.restaurants[i].restaurant.thumb;
+        var restaurantLong = zomatoData.restaurants[i].restaurant.location.longitude;
+        var restaurantLat = zomatoData.restaurants[i].restaurant.location.latitude;
 
         // Write results to page 
         var resultSection = $('<div>');
         resultSection.addClass('restaurant');
+        resultSection.attr('data-longitude', restaurantLong);
+        resultSection.attr('data-latitude', restaurantLat);
         resultSection.attr('id', 'result-' + resultCounter);
         $('#results-section').append(resultSection);
 
@@ -108,13 +112,18 @@ $(document).ready(function() {
 
         // Then display the remaining fields
         $('#result-' + resultCounter)
-          .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>');
-
+          .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>').append('<button type="submit" class="btn btn-primary" id="submit-btn">Get Directions</button>');
+          // ^^^ this is updated piece of code incase the pull overrides
+          // how to make an updating id for the directions button
       }
+
 
     });
 
   }
+
+
+
 
   // Runs Zomato search
   $("#search-cuisine").on("change", function(event) {
@@ -126,11 +135,14 @@ $(document).ready(function() {
     $('#results-section').empty();
 
     searchCuisine = $('#search-cuisine').val();
-    
+      console.log("--------")
+      console.log(userAddress)
+
+
       console.log(userLongitude);
       console.log(userLatitude);
-
-    var restaurantQueryURL = restaurantQueryURLBase + '&lat=' + userLatitude + '&lon=' + userLongitude + '&cuisines=' + searchCuisine + '&radius=' + searchRadius + '&count=' + numResults;
+      console.log("--------")
+    var restaurantQueryURL = restaurantQueryURLBase + '&lat=' + userLatitude + '&lon=' + userLongitude + '&cuisines=' + searchCuisine + '&count=' + numResults;
 
     runRestaurantQuery(numResults, restaurantQueryURL);
 
@@ -181,10 +193,31 @@ $(document).ready(function() {
     });
   };
 
+  
+  $(document).on('click', '#results-section button', function(event) {
+    
+    event.preventDefault();
+
+    $('#display-direction').empty();
+    stepCount = 1;
+
+    restLat = $(this).closest('.restaurant').attr('data-latitude');
+    restLon = $(this).closest('.restaurant').attr('data-longitude');
+
+    directionsQueryURL = directionsQueryURLBase + userLongitude + ',' + userLatitude + 
+      ';' + restLon + ',' + restLat + 
+      '?access_token=' + access_token + '&steps=' + steps;
+
+    runDirectionsQuery(directionsQueryURL);
+
+  });
+
+
   $('#directions-btn').on('click', function(event) {
     event.preventDefault();
 
     $('#display-direction').empty();
+    stepCount = 0;
 
     userLat = $('#user-lat').val().trim();
       console.log(userLat);
