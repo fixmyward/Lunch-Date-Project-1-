@@ -125,6 +125,7 @@ $(document).ready(function() {
           .append('<button type="submit" class="btn btn-primary" id="submit-btn">Get Directions</button>');
       }
 
+      $("#direction-row").hide();
       $("#restaurant-lists").show();
 
       $('html, body').animate({
