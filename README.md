@@ -18,8 +18,8 @@
 
 ## Authors
 
-* **Samuel Boediono** ([samuelboediono.github.io](https://dbmarshall.github.io))
-* **Mathab Ghez** ([mghezel.github.io](https://?????.github.io))
+* **Samuel Boediono** ([samuelboediono.github.io](https://samuelboediono.github.io))
+* **Mathab Ghez** ([mghezel.github.io](https://github.com/mghezel))
 * **Alex Iturreria** ([alexitu3.github.io](https://alexitu3.github.io))
 * **David Morse** ([dbmarshall.github.io](https://dbmarshall.github.io))
 
