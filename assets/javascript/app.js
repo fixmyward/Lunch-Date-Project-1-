@@ -14,7 +14,6 @@ $(document).ready(function() {
   var locationQueryURLBase = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 
   function runLocationQuery(locationQueryURL) {
-          // console.log(locationQueryURLBase);
 
     $.ajax({
       url: locationQueryURL,
@@ -113,17 +112,12 @@ $(document).ready(function() {
         // Then display the remaining fields
         $('#result-' + resultCounter)
           .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>').append('<button type="submit" class="btn btn-primary" id="submit-btn">Get Directions</button>');
-          // ^^^ this is updated piece of code incase the pull overrides
-          // how to make an updating id for the directions button
       }
 
 
     });
 
   }
-
-
-
 
   // Runs Zomato search
   $("#search-cuisine").on("change", function(event) {
@@ -147,15 +141,12 @@ $(document).ready(function() {
     runRestaurantQuery(numResults, restaurantQueryURL);
 
     $("#restaurant-lists").show();
-    $("#direction-row").show();
+
   });
 
 /* 
     Mapbox Directions API -------------------
 */
-  // var userAddress = '';
-  // var userLat = '';
-  // var userLon = '';
   var restAddress = '';
   var restLat = '';
   var restLon = '';
@@ -188,12 +179,17 @@ $(document).ready(function() {
 
       $('#display-direction').append('<p><strong>Enjoy your lunch date!</strong></p>');
         
-      $('#display-directions').show();
+      $('#direction-row, #display-directions').show();
+
+      $('#steps-away').text(stepCount - 1);
+
+      $('html, body').animate({
+            scrollTop: $('#direction-row').offset().top
+        }, 2000);
 
     });
   };
 
-  
   $(document).on('click', '#results-section button', function(event) {
     
     event.preventDefault();
@@ -212,41 +208,9 @@ $(document).ready(function() {
 
   });
 
-
-  $('#directions-btn').on('click', function(event) {
-    event.preventDefault();
-
-    $('#display-direction').empty();
-    stepCount = 0;
-
-    userLat = $('#user-lat').val().trim();
-      console.log(userLat);
-    userLon = $('#user-lon').val().trim();
-      console.log(userLon);
-
-    restLat = $('#rest-lat').val().trim();
-      console.log(restLat);
-    restLon = $('#rest-lon').val().trim();
-      console.log(restLon);
-
-    //userAddress = encodeURIComponent(userAddress);
-    
-    // https://api.mapbox.com/directions/v5/mapbox/cycling/-122.42,37.78;-77.03,38.91?steps=true&alternatives=true&access_token=your-access-token
-    directionsQueryURL = directionsQueryURLBase + userLon + ',' + userLat + 
-      ';' + restLon + ',' + restLat + 
-      '?access_token=' + access_token + '&steps=' + steps;
-
-      // console.log(queryURL);
-
-    // $('#display-directions').append('Click to see directions JSON: <a href="' + queryURL + '" target="_blank">https://api.mapbox.com/directions/v5/mapbox/walking/...</a>');
-
-    runDirectionsQuery(directionsQueryURL);
-  });
-
 /* 
     Chat -------------------
 */
-
   // Chat header behavior
   var closedHeight = 48;
   var openHeight = 170;
