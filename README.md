@@ -80,24 +80,13 @@ function runRestaurantQuery(numResults, restaurantQueryURL) {
 
         resultCounter++;
 
-        var restaurantName = zomatoData.restaurants[i].restaurant.name;
-        var restaurantAddress = zomatoData.restaurants[i].restaurant.location.address;
-        var restaurantAggRating = zomatoData.restaurants[i].restaurant.user_rating.aggregate_rating;
-        var restaurantMenu = zomatoData.restaurants[i].restaurant.menu_url;
-        var restaurantThumb = zomatoData.restaurants[i].restaurant.thumb;
-        var restaurantLong = zomatoData.restaurants[i].restaurant.location.longitude;
-        var restaurantLat = zomatoData.restaurants[i].restaurant.location.latitude;
+        // Create variables for data sought, and log results
+        ...
 
-        
-        var resultSection = $('<div>');
-        resultSection.addClass('restaurant');
-        resultSection.attr('data-longitude', restaurantLong);
-        resultSection.attr('data-latitude', restaurantLat);
-        resultSection.attr('data-name', restaurantName);
-        resultSection.attr('id', 'result-' + resultCounter);
-        $('#results-section').append(resultSection);
+        // Write results to page 
+        ...
 
-  
+        // Confirm that the specific JSON for the result isn't missing any details
         if (restaurantThumb !== 'null') {
           $('#result-' + resultCounter)
             .append('<div class="restaurant-thumb"><img src="'+ restaurantThumb + '"></div>');
@@ -114,6 +103,24 @@ function runRestaurantQuery(numResults, restaurantQueryURL) {
           $('#result-' + resultCounter)
             .append('<h5> '+ restaurantAddress + '</h5>');
         }
+
+        // Then display the remaining fields
+        $('#result-' + resultCounter)
+          .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>')
+          .append('<button type="submit" class="btn btn-primary" id="submit-btn">Get Directions</button>');
+      }
+
+      $("#direction-row").hide();
+      $("#restaurant-lists").show();
+
+      $('html, body').animate({
+        scrollTop: $('#restaurant-lists').offset().top
+      }, 2000);
+
+
+    });
+
+  }
 
 ```
 
