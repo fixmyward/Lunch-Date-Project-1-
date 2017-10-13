@@ -24,7 +24,80 @@ Instead of using three different apps (Yelp, google maps and text message) to ar
 
 ## Code Examples
 
-**MapBox API**
+**HTML5 Geolocation**
+
+```javascript
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+    userLatitude = position.coords.latitude;
+    userLongitude = position.coords.longitude;
+    $('#geolocating-now').hide();
+    $('#cuisine-choice').show();
+  },
+  function (error) { 
+    if (error.code == error.PERMISSION_DENIED)
+      $('#geolocating-now').hide();
+      $("#location-address").show();
+  });
+
+```
+
+**Zomato API**
+
+```javascript
+
+function runRestaurantQuery(numResults, restaurantQueryURL) {
+
+    $.ajax({
+      url: restaurantQueryURL,
+      method: 'GET'
+    }).done(function(zomatoData) {
+
+      // Loop through and provide the correct number of results
+      for (var i = 0; i < numResults; i++) {
+
+        resultCounter++;
+
+        // Create variables for data sought, and log results
+        ...
+
+        // Write results to page 
+        var resultSection = $('<div>');
+        resultSection.addClass('restaurant');
+        resultSection.attr('data-longitude', restaurantLong);
+        resultSection.attr('data-latitude', restaurantLat);
+        resultSection.attr('data-name', restaurantName);
+        resultSection.attr('id', 'result-' + resultCounter);
+        $('#results-section').append(resultSection);
+
+        // Confirm that the specific JSON for the result isn't missing any details
+        if (restaurantThumb !== 'null') {
+          $('#result-' + resultCounter)
+            .append('<div class="restaurant-thumb"><img src="'+ restaurantThumb + '"></div>');
+        }
+        ...
+
+        // Then display the remaining fields
+        $('#result-' + resultCounter)
+          .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>')
+          .append('<button type="submit" class="btn btn-primary" id="submit-btn">Get Directions</button>');
+      }
+
+      $("#direction-row").hide();
+      $("#restaurant-lists").show();
+
+      $('html, body').animate({
+        scrollTop: $('#restaurant-lists').offset().top
+      }, 2000);
+
+
+    });
+
+  }
+
+```
+
+**MapBox Directions API**
 
 ```javascript
 
@@ -61,66 +134,6 @@ function runDirectionsQuery(directionsQueryURL) {
 
     });
   };
-
-```
-
-**Zomato API**
-
-```javascript
-
-function runRestaurantQuery(numResults, restaurantQueryURL) {
-
-    $.ajax({
-      url: restaurantQueryURL,
-      method: 'GET'
-    }).done(function(zomatoData) {
-
-      // Loop through and provide the correct number of results
-      for (var i = 0; i < numResults; i++) {
-
-        resultCounter++;
-
-        // Create variables for data sought, and log results
-        ...
-
-        // Write results to page 
-        ...
-
-        // Confirm that the specific JSON for the result isn't missing any details
-        if (restaurantThumb !== 'null') {
-          $('#result-' + resultCounter)
-            .append('<div class="restaurant-thumb"><img src="'+ restaurantThumb + '"></div>');
-        }
-        if (restaurantName !== 'null') {
-          $('#result-' + resultCounter)
-            .append(
-              '<h3 class="articleHeadline"><span class="label label-primary">' +
-              resultCounter + '</span><strong> ' +
-              restaurantName + '</strong></h3>'
-            );
-        }
-        if (restaurantAddress !== 'null') {
-          $('#result-' + resultCounter)
-            .append('<h5> '+ restaurantAddress + '</h5>');
-        }
-
-        // Then display the remaining fields
-        $('#result-' + resultCounter)
-          .append('<h5>Rating: ' + restaurantAggRating + ' | <a href="' + restaurantMenu + '" target="_blank">Menu</a></h5>')
-          .append('<button type="submit" class="btn btn-primary" id="submit-btn">Get Directions</button>');
-      }
-
-      $("#direction-row").hide();
-      $("#restaurant-lists").show();
-
-      $('html, body').animate({
-        scrollTop: $('#restaurant-lists').offset().top
-      }, 2000);
-
-
-    });
-
-  }
 
 ```
 
