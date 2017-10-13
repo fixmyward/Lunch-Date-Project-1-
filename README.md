@@ -10,7 +10,7 @@
 An app which facilitates two friends in nearby locations discussing and choosing a restaurant at which to share lunch, providing each user directions to the mutually selected restaurant.
 
 ## Motivation
-We were tired of using 3 different apps () when we could instead design a single app which contains the same functionality.
+Instead of using three different apps (Yelp, google maps and text message) to arrange a lunch date, we could design a single app which contains the same functionality.
 
 ## Technology Utilized:
 
