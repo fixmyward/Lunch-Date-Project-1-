@@ -22,6 +22,12 @@ Instead of using three different apps (Yelp, google maps and text message) to ar
 * Mapbox Directions API
 * Firebase
 
+## Visual App Walk-Through
+ 
+![Lunch Date walk-through](https://samuelboediono.github.io/Lunch-Date-Project-1-/assets/images/LunchDate_animated_600.gif "Lunch Date in Action")
+
+(Animated GIF of complete app flow)
+
 ## Code Examples
 
 **HTML5 Geolocation**
@@ -202,10 +208,6 @@ function runDirectionsQuery(directionsQueryURL) {
   }
 
 ```
-
-## Visual App Walk-Through
- 
-![Lunch Date walk-through](https://samuelboediono.github.io/Lunch-Date-Project-1-/assets/images/LunchDate_animated_600.gif "Lunch Date in Action")
 
 ## Authors
 
