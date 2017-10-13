@@ -7,26 +7,27 @@
 
 <!-- look up how link images of code for  -->
 ## Synopsis
-An app that facilitates two friends in nearby locations discussing and choosing a restaurant at which to share lunch, providing each user directions to the mutually selected restaurant.
-
+An app which facilitates two friends in nearby locations discussing and choosing a restaurant at which to share lunch, providing each user directions to the mutually selected restaurant.
 
 ## Motivation
-We tired of using 3 different apps when we could design an app that contains all the functions.
+We were tired of using 3 different apps () when we could instead design a single app which contains the same functionality.
 
 ## Technology Utilized:
 
 * Bootstrap
-* jQuery
+* Javascript/jQuery
 * HTML5 Geolocation
 * Mapbox Places API 
 * Zomato API
 * Mapbox Directions API
 * Firebase
 
-##Additional Info
+## Code Examples
 
-------MapBox API-------
-```
+**MapBox API**
+
+```javascript
+
 function runDirectionsQuery(directionsQueryURL) {
 
     $.ajax({
@@ -61,12 +62,12 @@ function runDirectionsQuery(directionsQueryURL) {
     });
   };
 
-
 ```
 
-------Zomato API-------
+**Zomato API**
 
-```
+```javascript
+
 function runRestaurantQuery(numResults, restaurantQueryURL) {
 
     $.ajax({
@@ -116,10 +117,9 @@ function runRestaurantQuery(numResults, restaurantQueryURL) {
 
 ```
 
+**Firebase Chat**
 
-------Firebase Chat------
-
-```
+```javascript
 
 var closedHeight = 48;
   var openHeight = 170;
@@ -158,7 +158,11 @@ var closedHeight = 48;
 
 ```
 
+## Visual App Walk-Through
+ 
+![Lunch Date walk-through](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Lunch Date in Action")
 
+(Real animated GIF for above coming soon)
 
 ## Authors
 
