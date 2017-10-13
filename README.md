@@ -185,7 +185,7 @@ function runRestaurantQuery(numResults, restaurantQueryURL) {
 
 ## Visual App Walk-Through
  
-![Lunch Date walk-through](https://samuelboediono.github.io/Lunch-Date-Project-1-/assets/images/LunchDate_animated.gif =600x613)
+![Lunch Date walk-through](https://samuelboediono.github.io/Lunch-Date-Project-1-/assets/images/LunchDate_animated.gif "Lunch Date in Action")
 
 ## Authors
 
