@@ -121,46 +121,71 @@ function runRestaurantQuery(numResults, restaurantQueryURL) {
 
 ```javascript
 
-var closedHeight = 48;
-  var openHeight = 170;
-  $('#chat-heading').on('click', function(event) {
-    footerHeight = $(this).closest('.footer').outerHeight();
-    if (footerHeight !== openHeight) {
-      $('.footer').css('height', openHeight);
-      $('.container').css('margin-bottom', openHeight);
-      $(this).attr('title', 'Click to close chat');
-      $(this).toggleClass('collapsed');
-    } else {
-      $('.footer').css('height', closedHeight);
-      $('.container').css('margin-bottom', closedHeight);
-      $(this).attr('title', 'Click to open chat');
-      $(this).toggleClass('collapsed');
-    }
+// Chat listeners
+  chatRef.on('child_removed', function(chatSnapshot) {
+    $('#chat-area').empty();
+    $('#chat-area').html('The other player has disconnected.');
+    setTimeout(function() {
+      $('#chat-area').empty();
+    }, 3000);
   });
-  
-  var config = {
-    apiKey: "AIzaSyACuYdpSh6e2wKU0XFX2Cc60C88e_oVKck",
-    authDomain: "lunch-date-14315.firebaseapp.com",
-    databaseURL: "https://lunch-date-14315.firebaseio.com",
-    projectId: "lunch-date-14315",
-    storageBucket: "",
-    messagingSenderId: "759801042798"
-  };
-  firebase.initializeApp(config);
+  chatRef.on('child_added', function(chatSnapshot) {
 
-  var database =  firebase.database();
-  var playersRef = database.ref('/players');
-  var chatRef = database.ref('/chat');
+    if (playerSet) {
+      if (chatSnapshot.val()) {
 
-  var playerId = 0;
-  var playerSet = false;
-  var name = '';
+        var chatPlayer = chatSnapshot.val().playerId; 
+        var chatName = chatSnapshot.val().name; 
+        var chatMessage = chatSnapshot.val().message;
+        var newChat = $('<p>')
+          .addClass('playerid-' + chatPlayer)
+          .html('<span class="chat-name">' + chatName + ':</span> ' + chatMessage);
+        $('#chat-area').append(newChat);
+        $('#chat-area').scrollTop($('#chat-area')[0].scrollHeight);
+      }
+    }
+
+  }, function(errorObject) {
+    console.log("The chat read failed: " + errorObject.code);
+  });
+
+  // User listener
+  playersRef.on('value', function(playersSnapshot) {
+    var playersNum = playersSnapshot.numChildren();
+
+    if (!playerSet) {
+      if (playersSnapshot.child('1').exists()) {
+        playerId = 2;
+      } else {
+        playerId = 1;
+      }
+    }
+
+  }, function(errorObject) {
+    console.log("The player read failed: " + errorObject.code);
+  });
+
+
+  function writeChatData(playerId, name, message) {
+    firebase.database().ref('chat').push({
+      playerId: playerId,
+      name: name,
+      message: message,
+      dateAdded: firebase.database.ServerValue.TIMESTAMP
+    });
+  }
+
+  function writeUserData(playerId, name) {
+    firebase.database().ref('players/' + playerId).set({
+      name: name
+    });
+  }
 
 ```
 
 ## Visual App Walk-Through
  
-![Lunch Date walk-through](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Lunch Date in Action")
+![Lunch Date walk-through](https://samuelboediono.github.io/Lunch-Date-Project-1-/LunchDate_animated.gif "Lunch Date in Action")
 
 (Real animated GIF for above coming soon)
 
