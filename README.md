@@ -21,7 +21,6 @@ Instead of using three different apps (Yelp, google maps and text message) to ar
 * Zomato API
 * Mapbox Directions API
 * Firebase
-* sadsadsad
 
 ## Visual App Walk-Through
  
